@@ -10,15 +10,15 @@ import os
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 
 def getch():
-    byteLiteral = rawGetch()
-    if byteLiteral == b'\r':
-        decoded = "@" #substitute character for <Return>
-    elif byteLiteral == b'q':
+    rawChar = rawGetch()
+    if rawChar == '\r':
+        inpChar = "@" #substitute character for <Return>
+    elif rawChar == 'q': # naive escape
         print("Good bye.")
         exit()
     else:
-        decoded = byteLiteral.decode("latin1")
-    return decoded
+        inpChar = rawChar
+    return inpChar
 
 class Stack:
     '''
