@@ -100,6 +100,7 @@ class Stack:
 # operations cannot start with q, since
 # q is a catchall to quit the program
 # in any mode. see getch()
+# TODO: more mathmatical testing; technical exceptions
 
 def stackAdd(stack):
     b = stack.pop()
@@ -119,14 +120,22 @@ def stackMultiply(stack):
 def stackDivide(stack):
     b = stack.pop()
     a = stack.pop()
-    stack.push(a / b)
+    try:
+        r = a / b
+    except ZeroDivisionError:
+        print("can't divide by 0")
+        # return operators to stack
+        stack.push(a)
+        stack.push(b)
+    else:
+        stack.push(r)
 
 def stackLn(stack):
     a = stack.pop()
     try:
         r = math.log(a)
     except ValueError:
-        print("can't ln that!")
+        print("can't ln a negative")
         stack.push(a) # return the number
     else:
         stack.push(r) # push the answer
