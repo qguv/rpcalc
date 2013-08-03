@@ -123,7 +123,13 @@ def stackDivide(stack):
 
 def stackLn(stack):
     a = stack.pop()
-    stack.push(math.log(a))
+    try:
+        r = math.log(a)
+    except ValueError:
+        print("can't ln that!")
+        stack.push(a) # return the number
+    else:
+        stack.push(r) # push the answer
 
 def stackClear(stack):
     for i in range(len(stack.items)):
