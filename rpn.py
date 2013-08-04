@@ -14,7 +14,8 @@ def getch():
     if rawChar == '\r':
         inpChar = "@" #substitute character for <Return>
     elif rawChar == 'q': # naive escape
-        print("Good bye.")
+        print("bye.")
+        if not DEBUG: clear()
         exit()
     else:
         inpChar = rawChar
@@ -50,7 +51,6 @@ class Stack:
     def __str__(self): #ref: len
         rep = self.name
         if self.name != '': rep += '\n'
-        if DEBUG: print("This is where the name would go.")
         backList = [ self[i] for i in range(len(self)) ]
         if len(self) != 0:
             longestEntry = max( [ len(str(i)) for i in self.items ] )
@@ -66,7 +66,7 @@ class Stack:
         #looks like entry point
         return rep
 
-    def linearView(self): #ref: getitem, len #TODO test this
+    def linearView(self): #ref: getitem, len
         backList = [ self[i] for i in range(len(self)) ]
         print(str(backList))
 
@@ -76,7 +76,7 @@ class Stack:
     def pop(self):
         #TODO define "is empty" (re: Alan)
         if len(self) == 0:
-            print("Stack is empty!")
+            print("empty stack!")
         else:
             return self.items.pop()
 
@@ -123,7 +123,7 @@ def stackDivide(stack):
     try:
         r = a / b
     except ZeroDivisionError:
-        print("can't divide by 0")
+        print("can't divide by 0!")
         # return operators to stack
         stack.push(a)
         stack.push(b)
@@ -135,7 +135,7 @@ def stackLn(stack):
     try:
         r = math.log(a)
     except ValueError:
-        print("can't ln a negative")
+        print("can't ln a negative!")
         stack.push(a) # return the number
     else:
         stack.push(r) # push the answer
@@ -235,13 +235,12 @@ def operate(operator, stack):
         operationFn = operators[operator][0] #get operation fn name
         operationFn(stack) #do that operation fn on current stack
     else:
-        print ("Not enough entries in stack for", operator + "!")
+        print ("too few entries for", operator + "!")
 
 def readCalc(stack): # third re-write!
     buf = ''
     printFlag = False #TODO gotta make this work for errors, too
     while True:
-        #if DEBUG: print(stack)
         if not printFlag: stack.rpnView(buf) # correct view for HP calcs
         if printFlag:
             # replaces normal print with a view of the stack
@@ -259,7 +258,7 @@ def readCalc(stack): # third re-write!
                 try:
                     stack.push(float(buf[:-1]))
                 except TypeError:
-                    print("That's no number!")
+                    print("not a number!")
             buf = ''
         elif buf == 'p': # Special "print" operator
             printFlag = True
@@ -271,19 +270,18 @@ def readCalc(stack): # third re-write!
             operBuf = buf[-1] # initialize operator buffer
             buf = ''
             while operBuf not in operators.keys(): # side loop
-                if DEBUG: print("Oper Loop is running")
                 operBuf += getch()
                 if not any(operBuf in s for s in operators.keys()):
-                    print("not an operation")
+                    print("not an operator!")
                     operBuf = ''
                     break
             else:
                 operate(operBuf, stack)
                 operBuf = ''
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
-            print("Huh?")
+            print("type ? for help")
             buf = ''
 
 # DO IT #
-mainStack = Stack([], 'Main Stack')
+mainStack = Stack([], 'Test')
 readCalc(mainStack)
