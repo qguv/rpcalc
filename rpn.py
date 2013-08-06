@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# a reverse polish notation calculator
+# see github.com/qguv/rpcalc for updates
 
 DEBUG = False
 
@@ -31,7 +33,11 @@ class Stack:
     the y register is at [-2]
     et cetera
     This is accessed as is intuitive, however:
+    >>> myStack.push(5.7005)
+    >>> myStack.push(4.8879)
     >>> x = myStack[0]
+    >>> print(x)
+    4.8879
     '''
     # note: these methods are ordered!
     # references to other methods are
@@ -95,147 +101,17 @@ class Stack:
         else:
             print(0)          # or just default to 0
 
-# Operations #
-# TODO: Make each of these classes
-# operations cannot start with q, since
-# q is a catchall to quit the program
-# in any mode. see getch()
-# TODO: more mathmatical testing; technical exceptions
+import operators as ops
 
-def stackAdd(stack):
-    b = stack.pop()
-    a = stack.pop()
-    stack.push(a + b)
+def getArgReq(symbol):
+    return ops.bindings[symbol][1]
 
-def stackSubtract(stack):
-    b = stack.pop()
-    a = stack.pop()
-    stack.push(a - b)
-
-def stackMultiply(stack):
-    b = stack.pop()
-    a = stack.pop()
-    stack.push(a * b)
-
-def stackDivide(stack):
-    b = stack.pop()
-    a = stack.pop()
-    try:
-        r = a / b
-    except ZeroDivisionError:
-        print("can't divide by 0!")
-        # return operators to stack
-        stack.push(a)
-        stack.push(b)
+def operate(symbol, stack):
+    if stack.canOperate(getArgReq(symbol)):
+        fn = ops.bindings[symbol][0] #get operation fn name
+        fn(stack) # absolute magic
     else:
-        stack.push(r)
-
-def stackLn(stack):
-    a = stack.pop()
-    try:
-        r = math.log(a)
-    except ValueError:
-        print("can't ln a negative!")
-        stack.push(a) # return the number
-    else:
-        stack.push(r) # push the answer
-
-def stackClear(stack):
-    for i in range(len(stack.items)):
-        stackDrop(stack)
-
-def stackDrop(stack):
-    null = stack.pop()
-
-def stackDupX(stack):
-    a = stack.pop()
-    stack.push(a)
-    stack.push(a)
-
-def stackSwapXY(stack):
-    x = stack.pop()
-    y = stack.pop()
-    stack.push(x)
-    stack.push(y)
-
-def stackPower(stack):
-    b = stack.pop()
-    a = stack.pop()
-    stack.push(a ^ b)
-
-def stackModulus(stack):
-    b = stack.pop()
-    a = stack.pop()
-    stack.push(a % b)
-
-def stackEqTest(stack):
-    b = stack.pop()
-    a = stack.pop()
-    r = 1 if a == b else 0
-    stack.push(r)
-
-def stackNotTest(stack):
-    b = stack.pop()
-    a = stack.pop()
-    r = 1 if a != b else 0
-    stack.push(r)
-
-def stackLtTest(stack):
-    b = stack.pop()
-    a = stack.pop()
-    r = 1 if a < b else 0
-    stack.push(r)
-
-def stackGtTest(stack):
-    b = stack.pop()
-    a = stack.pop()
-    r = 1 if a > b else 0
-    stack.push(r)
-
-def stackLtEqTest(stack):
-    b = stack.pop()
-    a = stack.pop()
-    r = 1 if a <= b else 0
-    stack.push(r)
-
-def stackGtEqTest(stack):
-    b = stack.pop()
-    a = stack.pop()
-    r = 1 if a >= b else 0
-    stack.push(r)
-
-operators = {
-    # Key is the arithmetic keypress
-    # Value[0] is the paired function
-    # Value[1] is the argument requirement
-        '+' :   [stackAdd       , 2],
-        '-' :   [stackSubtract  , 2],
-        '*' :   [stackMultiply  , 2],
-        '/' :   [stackDivide    , 2],
-        'ln':   [stackLn        , 1],
-        'd' :   [stackDrop      , 1],
-        'c' :   [stackClear     , 1],
-        'x' :   [stackDupX      , 1],
-        's' :   [stackSwapXY    , 2],
-        '%' :   [stackModulus   , 2],
-        '^' :   [stackPower     , 2],
-        '==':   [stackEqTest    , 2],
-        '=!':   [stackNotTest   , 2],
-        '<' :   [stackLtTest    , 2],
-        '>' :   [stackGtTest    , 2],
-        '=<':   [stackLtEqTest  , 2],
-        '=>':   [stackGtEqTest  , 2],
-        }
-
-def getArgReq(operator, stack):
-    return operators[operator][1]
-
-def operate(operator, stack):
-    if stack.canOperate(getArgReq(operator, stack)):
-        operationFn = operators[operator][0] #get operation fn name
-        operationFn(stack) #do that operation fn on current stack
-    else:
-        print ("too few entries for", operator + "!")
+        print("too few entries for", symbol + "!")
 
 def readCalc(stack): # third re-write!
     buf = ''
@@ -263,15 +139,15 @@ def readCalc(stack): # third re-write!
         elif buf == 'p': # Special "print" operator
             printFlag = True
             buf = ''
-        elif any(buf[-1] in s for s in operators.keys()):
+        elif any(buf[-1] in s for s in ops.bindings.keys()):
         # character just inserted is an operator
             if len(buf) != 1: # if there are any numbers to enter
                 stack.push(float(buf[:-1]))
             operBuf = buf[-1] # initialize operator buffer
             buf = ''
-            while operBuf not in operators.keys(): # side loop
+            while operBuf not in ops.bindings.keys(): # side loop
                 operBuf += getch()
-                if not any(operBuf in s for s in operators.keys()):
+                if not any(operBuf in s for s in ops.bindings.keys()):
                     print("not an operator!")
                     operBuf = ''
                     break
