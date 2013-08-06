@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
+# I/O functions for rpcalc
+# for more info, see github.com/qguv/rpcalc
 
-# I did not write this! Danny Yoo did! http://code.activestate.com/recipes/users/98032/
-# Shamelessly "borrowed" from: http://code.activestate.com/recipes/134892/
+# definition of Clear function
+import os
+clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 
+# I did not write the getch function! Danny Yoo did! http://code.activestate.com/recipes/users/98032/
+# please see http://code.activestate.com/recipes/134892/
 class _Getch:
     """Gets a single character from standard input.  Does not echo to the
 screen."""
@@ -11,14 +16,11 @@ screen."""
             self.impl = _GetchWindows()
         except ImportError:
             self.impl = _GetchUnix()
-
     def __call__(self): return self.impl()
-
 
 class _GetchUnix:
     def __init__(self):
         import tty, sys
-
     def __call__(self):
         import sys, tty, termios
         fd = sys.stdin.fileno()
@@ -30,15 +32,12 @@ class _GetchUnix:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
 
-
 class _GetchWindows:
     def __init__(self):
         import msvcrt
-
     def __call__(self):
         import msvcrt
         byteLiteral = msvcrt.getch()
         return byteLiteral.decode("latin1")
-
 
 getch = _Getch()

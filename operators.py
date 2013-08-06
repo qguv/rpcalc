@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-# rpn operators using stack datatype
+# rpcalc operators using stack datatype
+# for more info, see github.com/qguv/rpcalc
+
+import math
 
 # Operations #
 # TODO: Make each of these classes
@@ -67,7 +70,7 @@ def SwapXY(stack):
 def Power(stack):
     b = stack.pop()
     a = stack.pop()
-    stack.push(a ^ b)
+    stack.push(a ** b)
 
 def Modulus(stack):
     b = stack.pop()
