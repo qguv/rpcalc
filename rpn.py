@@ -80,5 +80,5 @@ def readCalc(stack): # third re-write!
             buf = ''
 
 # DO IT #
-mainStack = Stack([], 'Test')
+mainStack = Stack([], 'Stack\nContents')
 readCalc(mainStack)

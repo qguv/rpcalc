@@ -49,6 +49,7 @@ class Stack:
             rep += ' '
             rep += str(self.items[i])
             rep += '\n'
+        rep += '\n'
         rep += '^ ' * int(math.floor(longestEntry / 2 + 1)) + '^'
         #looks like entry point
         return rep
