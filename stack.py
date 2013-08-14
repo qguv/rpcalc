@@ -74,7 +74,6 @@ class Stack:
             return False
 
     def rpnView(self, buf):
-        clear()
         if buf != '':         # if buffer exists,
             print(buf)        #   print that
         elif len(self) >= 1: # if there is an x reg,

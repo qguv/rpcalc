@@ -6,6 +6,8 @@ import math
 from stack import Stack
 from inout import clear
 
+errors = ''
+
 # Getch operations
 from inout import getch as rawGetch
 def getch():
@@ -27,18 +29,24 @@ def getArgReq(symbol):
     return ops.bindings[symbol][1]
 
 def operate(symbol, stack):
+    global errors
     if stack.canOperate(getArgReq(symbol)):
         fn = ops.bindings[symbol][0] # get operation fn name
         fn(stack) # absolute magic
     else:
-        print("too few entries for", symbol + "!")
+        errors = "too few entries for " + symbol + "!"
 
 # the big guns
 def readCalc(stack): # third re-write!
+    global errors
     buf = ''
     printFlag = False #TODO gotta make this work for errors, too
     while True:
-        if not printFlag: stack.rpnView(buf) # correct view for HP calcs
+        if not printFlag:
+            clear()
+            if errors != '': print(errors)
+            stack.rpnView(buf) # correct view for HP calcs
+            errors = ''
         if printFlag:
             # replaces normal print with a view of the stack
             clear()
@@ -54,8 +62,8 @@ def readCalc(stack): # third re-write!
             else: # put number in stack
                 try:
                     stack.push(float(buf[:-1]))
-                except TypeError:
-                    print("not a number!")
+                except (TypeError, ValueError):
+                    errors="not a number!"
             buf = ''
         elif buf == 'p': # Special "print" operator
             printFlag = True
@@ -69,14 +77,14 @@ def readCalc(stack): # third re-write!
             while operBuf not in ops.bindings.keys(): # side loop
                 operBuf += getch()
                 if not any(operBuf in s for s in ops.bindings.keys()):
-                    print("not an operator!")
+                    errors = "not an operator!"
                     operBuf = ''
                     break
             else:
                 operate(operBuf, stack)
                 operBuf = ''
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
-            print("type ? for help")
+            errors = "type ? for help"
             buf = ''
 
 # DO IT #
