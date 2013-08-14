@@ -40,7 +40,7 @@ def operate(symbol, stack):
 def readCalc(stack): # third re-write!
     global errors
     buf = ''
-    printFlag = False #TODO gotta make this work for errors, too
+    printFlag = False
     while True:
         if not printFlag:
             clear()
