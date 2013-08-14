@@ -4,13 +4,7 @@
 
 import math
 
-# Operations #
-# TODO: Make each of these classes
-# operations cannot start with q, since
-# q is a catchall to quit the program
-# in any mode. see getch()
-# TODO: more mathmatical testing; technical exceptions
-
+# Add your own! Make sure to add a binding too.
 def Add(stack):
     b = stack.pop()
     a = stack.pop()
@@ -113,6 +107,12 @@ def GtEqTest(stack):
     r = 1 if a >= b else 0
     stack.push(r)
 
+# Bindings cannot include any of the following
+# characters for technical reasons: q @
+# Bindings must not begin with the name of
+# another binding. For instance, =< was chosen
+# over <= because it does not begin with (and
+# therefore does not conflic with) <.
 bindings = {
     # Key is the arithmetic keypress
     # Value[0] is the paired function
