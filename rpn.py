@@ -14,7 +14,7 @@ def getch():
     rawChar = rawGetch()
     if rawChar == '\r':
         inpChar = "@" #substitute character for <Return>
-    elif rawChar == 'q': # naive escape
+    elif rawChar == 'Q': # naive escape
         print("bye.")
         clear()
         exit()
@@ -89,7 +89,7 @@ def readCalc(stack): # third re-write!
                 operate(operBuf, stack)
                 operBuf = ''
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
-            errors = "function not implemented!"
+            errors = "not an operator!"
             buf = ''
 
 # DO IT #

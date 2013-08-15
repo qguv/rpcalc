@@ -119,6 +119,76 @@ def GtEqTest(stack):
     r = 1 if a >= b else 0
     stack.push(r)
 
+def TrigRoundFix(roughAnswer):
+    r = roughAnswer
+    if abs(r) < 1e-15:
+        r = 0.0
+    elif abs(r-1) < 1e-15:
+        r = 1.0
+    elif abs(r+1) < 1e-15:
+        r = -1.0
+    return r
+
+
+def Sine(stack):
+    a = stack.pop()
+    r = math.sin(a)
+    r = TrigRoundFix(r)
+    stack.push(r)
+
+def Cosine(stack):
+    a = stack.pop()
+    r = math.cos(a)
+    r = TrigRoundFix(r)
+    stack.push(r)
+
+def Tangent(stack):
+    a = stack.pop()
+    r = math.tan(a)
+    r = TrigRoundFix(r)
+    stack.push(r)
+
+def Arcsine(stack):
+    a = stack.pop()
+    r = math.asin(a)
+    r = TrigRoundFix(r)
+    stack.push(r)
+
+def Arccosine(stack):
+    a = stack.pop()
+    r = math.acos(a)
+    r = TrigRoundFix(r)
+    stack.push(r)
+
+def Arctangent(stack):
+    a = stack.pop()
+    r = math.atan(a)
+    r = TrigRoundFix(r)
+    stack.push(r)
+
+def ToDegrees(stack):
+    a = stack.pop()
+    r = math.degrees(a)
+    stack.push(r)
+
+def ToRadians(stack):
+    a = stack.pop()
+    r = math.radians(a)
+    stack.push(r)
+
+def SqRoot(stack):
+    a = stack.pop()
+    try:
+        r = math.sqrt(a)
+    except ValueError:
+        return "imaginary numbers not supported!"
+    stack.push(r)
+
+def Absolute(stack):
+    a = stack.pop()
+    r = abs(a)
+    stack.push(r)
+
 # Bindings cannot include any of the following
 # characters for technical reasons: q @
 # Bindings must not begin with the name of
@@ -134,13 +204,13 @@ bindings = {
         '*' :   [Multiply  , 2],
         '/' :   [Divide    , 2],
         'n' :   [Negate    , 1],
-        'r' :   [Random    , 0],
+        'rand': [Random    , 0],
         'f' :   [Floor     , 1],
         'ln':   [Ln        , 1],
-        'd' :   [Drop      , 1],
-        'c' :   [Clear     , 1],
+        'D' :   [Drop      , 1],
+        'C' :   [Clear     , 1],
         'x' :   [DupX      , 1],
-        's' :   [SwapXY    , 2],
+        'w' :   [SwapXY    , 2],
         '%' :   [Modulus   , 2],
         '^' :   [Power     , 2],
         '==':   [EqTest    , 2],
@@ -149,4 +219,14 @@ bindings = {
         '>' :   [GtTest    , 2],
         '=<':   [LtEqTest  , 2],
         '=>':   [GtEqTest  , 2],
+        'sin' : [Sine      , 1],
+        'cos' : [Cosine    , 1],
+        'tan' : [Tangent   , 1],
+        'asin': [Arcsine   , 1],
+        'acos': [Arccosine , 1],
+        'atan': [Arctangent, 1],
+        'deg' : [ToDegrees , 1],
+        'rad' : [ToRadians , 1],
+        'sqrt': [SqRoot    , 1],
+        'abs' : [Absolute  , 1],
         }
