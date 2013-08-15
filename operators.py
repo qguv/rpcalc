@@ -3,6 +3,7 @@
 # for more info, see github.com/qguv/rpcalc
 
 import math
+from random import random
 
 # Add your own! Make sure to add a binding too.
 def Add(stack):
@@ -32,6 +33,17 @@ def Divide(stack):
         stack.push(b)
     else:
         stack.push(r)
+
+def Negate(stack):
+    a = stack.pop()
+    stack.push(-1 * a)
+
+def Random(stack):
+    stack.push(random())
+
+def Floor(stack):
+    a = stack.pop()
+    stack.push(math.floor(a))
 
 def Ln(stack):
     a = stack.pop()
@@ -112,7 +124,7 @@ def GtEqTest(stack):
 # Bindings must not begin with the name of
 # another binding. For instance, =< was chosen
 # over <= because it does not begin with (and
-# therefore does not conflic with) <.
+# therefore does not conflict with) <.
 bindings = {
     # Key is the arithmetic keypress
     # Value[0] is the paired function
@@ -121,6 +133,9 @@ bindings = {
         '-' :   [Subtract  , 2],
         '*' :   [Multiply  , 2],
         '/' :   [Divide    , 2],
+        'n' :   [Negate    , 1],
+        'r' :   [Random    , 0],
+        'f' :   [Floor     , 1],
         'ln':   [Ln        , 1],
         'd' :   [Drop      , 1],
         'c' :   [Clear     , 1],

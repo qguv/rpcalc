@@ -13,6 +13,10 @@ A reverse polish notation calculator written in Python 3.
 ## Operation
 `rpcalc` uses a stack for all operations. This document assumes the user is familiar with stack-based calculators; in the future, more thorough documentation may be written for the lay user.
 
+### Installation
+As there are currently no binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/)
+###
+
 ### Concepts
 - Numbers are pushed into the stack once `Enter` is pressed or an operation is entered
 - Operations are executed as soon as they are typed; **do not** follow operations with `Enter`
@@ -25,6 +29,9 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `p` - prints the stack
 - `q` - quits the program, **no matter what**
 - `+ - * /` - basic arithmetic operations
+- `n` - returns (x * -1)
+- `r` - returns a random number between 0 and 1
+- `f` - floor-rounds x to an integer
 - `ln` - returns the natural log of the most recent stack entry (x)
 - `c` - clears the stack
 - `d` - drops _x_ and pushes stack items down to compensate
