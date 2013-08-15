@@ -27,10 +27,10 @@ def Divide(stack):
     try:
         r = a / b
     except ZeroDivisionError:
-        print("can't divide by 0!")
         # return operators to stack
         stack.push(a)
         stack.push(b)
+        return "can't divide by 0!"
     else:
         stack.push(r)
 
@@ -50,7 +50,7 @@ def Ln(stack):
     try:
         r = math.log(a)
     except ValueError:
-        print("can't ln a negative!")
+        return "can't ln a negative!"
         stack.push(a) # return the number
     else:
         stack.push(r) # push the answer
