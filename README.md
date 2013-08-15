@@ -95,7 +95,6 @@ _Results are designated with `>>>`, but these are really stored in the stack and
     >>> 1
 
 ### Known Issues
-- The backspace key doesn't work.
 - In-program help (`?`) is not yet supported.
 
 ## FAQ
