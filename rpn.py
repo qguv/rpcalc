@@ -89,7 +89,7 @@ def readCalc(stack): # third re-write!
                 operate(operBuf, stack)
                 operBuf = ''
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
-            errors = "type ? for help"
+            errors = "function not implemented!"
             buf = ''
 
 # DO IT #
