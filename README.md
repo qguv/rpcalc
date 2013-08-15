@@ -13,6 +13,13 @@ A reverse polish notation calculator written in Python 3.
 ## Operation
 `rpcalc` uses a stack for all operations. This document assumes the user is familiar with stack-based calculators; in the future, more thorough documentation may be written for the lay user.
 
+### Installation & Execution
+You will need Python 3.3 to run `rpcalc`. As there are currently no `rpcalc` binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/). Switch to the `rpcalc/` directory, and run the following from a command shell:
+
+    python3 rpn.py
+
+It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable. Google is your friend here.
+
 ### Concepts
 - Numbers are pushed into the stack once `Enter` is pressed or an operation is entered
 - Operations are executed as soon as they are typed; **do not** follow operations with `Enter`
@@ -25,6 +32,9 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `p` - prints the stack
 - `q` - quits the program, **no matter what**
 - `+ - * /` - basic arithmetic operations
+- `n` - returns (x * -1)
+- `r` - returns a random number between 0 and 1
+- `f` - floor-rounds x to an integer
 - `ln` - returns the natural log of the most recent stack entry (x)
 - `c` - clears the stack
 - `d` - drops _x_ and pushes stack items down to compensate
@@ -65,7 +75,10 @@ _Results are designated with `>>>`, but these are really stored in the stack and
     2 Enter Enter ==
     >>> 1
 
+### Known Issues
+- The backspace key doesn't work.
+
 ## Motivation
-At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, Python 3, and Object-Oriented Programming in general.
+At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, my workflow, Python 3, and Object-Oriented Programming in general.
 
 -[qguv](http://github.com/qguv/)
