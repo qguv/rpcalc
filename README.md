@@ -77,11 +77,12 @@ _Results are designated with `>>>`, but these are really stored in the stack and
 
 ### Known Issues
 - The backspace key doesn't work.
+- In-program help (`?`) is not yet supported.
 
 ## FAQ
 > **How do I do log base _x_?**
 
-A `log` function **will never be implemented** because the functionality is _already there_ and because there is no reason to memorize which stack item will be the base and on which item the log will operate.
+A `log` function is not scheduled to be implemented because the functionality is _already there_ and because there is no reason to memorize which stack item will be the base and on which item the log will operate.
 
 You will need to use the _change of base formula_:
 
@@ -96,4 +97,4 @@ Thank you, but please don't email me the bug! Make sure it's not a [known issue]
 ## Motivation
 At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, my workflow, Python 3, and Object-Oriented Programming in general.
 
--[qguv](http://github.com/qguv/)
+-[Quintus](http://github.com/qguv/)
