@@ -32,7 +32,10 @@ def operate(symbol, stack):
     global errors
     if stack.canOperate(getArgReq(symbol)):
         fn = ops.bindings[symbol][0] # get operation fn name
-        fn(stack) # absolute magic
+        try:
+            errors = fn(stack) # absolute magic
+        except OverflowError:
+            errors = "answer too large to compute!"
     else:
         errors = "too few entries for " + symbol + "!"
 
@@ -41,10 +44,12 @@ def readCalc(stack): # third re-write!
     global errors
     buf = ''
     printFlag = False
+    nonErrors = { '', None, '\n' }
     while True:
         if not printFlag:
             clear()
-            if errors != '': print(errors)
+            if errors not in nonErrors:
+                print(errors)
             stack.rpnView(buf) # correct view for HP calcs
             errors = ''
         if printFlag:
