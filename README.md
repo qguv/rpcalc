@@ -79,7 +79,7 @@ _Results are designated with `>>>`, but these are really stored in the stack and
 - The backspace key doesn't work.
 
 ## FAQ
-> How do I do log base _x_?
+> **How do I do log base _x_?**
 
 A `log` function **will never be implemented** because the functionality is _already there_ and because there is no reason to memorize which stack item will be the base and on which item the log will operate.
 
@@ -89,9 +89,9 @@ You will need to use the _change of base formula_:
 
     256 ln 2 ln /
 
-> I have a bug! Let me email that to you...
+> **I have a bug! Let me email that to you...**
 
-Thank you, but please don't email me the bug! Make sure it's not a _Known Issue_ (above), and write me a bug report [here](https://github.com/qguv/rpcalc/issues/new) or if you're familiar with git: fork, fix, and file a pull request.
+Thank you, but please don't email me the bug! Make sure it's not a [known issue](#known-issues), and write me a bug report [here](https://github.com/qguv/rpcalc/issues/new) or if you're familiar with git: fork, fix, and file a pull request.
 
 ## Motivation
 At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, my workflow, Python 3, and Object-Oriented Programming in general.
