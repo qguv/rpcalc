@@ -79,8 +79,8 @@ def Floor(stack):
 
 def Ln(stack):
     a = stack.pop()
-    if a < 0: 
-        return "can't ln a negative!"
+    if a <= 0: 
+        return "out of domain!"
     else:
         r = math.log(a)
         stack.push(r) # push the answer

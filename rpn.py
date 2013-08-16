@@ -77,7 +77,7 @@ def readCalc(stack): # third re-write!
         elif buf == 'p': # Special "print" operator
             printFlag = True
             buf = ''
-        elif any(buf[-1] in s for s in ops.bindings.keys()):
+        elif any( s.startswith(buf[-1]) for s in ops.bindings.keys() ):
         # character just inserted is an operator
             if len(buf) != 1: # if there are any numbers to enter
                 stack.push(float(buf[:-1]))
