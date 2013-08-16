@@ -2,6 +2,13 @@
 # rpcalc operators using stack datatype
 # for more info, see github.com/qguv/rpcalc
 
+# If an error is thrown in a binary operation,
+# the erroneous operator is discarded and the
+# proper operator is kept.
+
+# If an error is thrown in a unary operation,
+# the operator is discarded.
+
 import math
 from random import random
 
@@ -24,14 +31,12 @@ def Multiply(stack):
 def Divide(stack):
     b = stack.pop()
     a = stack.pop()
-    try:
-        r = a / b
-    except ZeroDivisionError:
-        # return operators to stack
-        stack.push(a)
-        stack.push(b)
+    if b == 0:
+        stack.push(a) # return dividend to stack
+        # divisor (0) gets the boot
         return "can't divide by 0!"
     else:
+        r = a / b
         stack.push(r)
 
 def Negate(stack):
@@ -47,12 +52,10 @@ def Floor(stack):
 
 def Ln(stack):
     a = stack.pop()
-    try:
-        r = math.log(a)
-    except ValueError:
+    if a < 0: 
         return "can't ln a negative!"
-        stack.push(a) # return the number
     else:
+        r = math.log(a)
         stack.push(r) # push the answer
 
 def Clear(stack):
@@ -150,15 +153,21 @@ def Tangent(stack):
 
 def Arcsine(stack):
     a = stack.pop()
-    r = math.asin(a)
-    r = TrigRoundFix(r)
-    stack.push(r)
+    if (a > 1) or (a < -1):
+        return "out of domain!"
+    else:
+        r = math.asin(a)
+        r = TrigRoundFix(r)
+        stack.push(r)
 
 def Arccosine(stack):
     a = stack.pop()
-    r = math.acos(a)
-    r = TrigRoundFix(r)
-    stack.push(r)
+    if (a > 1) or (a < -1):
+        return "out of domain!"
+    else:
+        r = math.acos(a)
+        r = TrigRoundFix(r)
+        stack.push(r)
 
 def Arctangent(stack):
     a = stack.pop()
@@ -178,11 +187,11 @@ def ToRadians(stack):
 
 def SqRoot(stack):
     a = stack.pop()
-    try:
-        r = math.sqrt(a)
-    except ValueError:
+    if (a < 0):
         return "imaginary numbers not supported!"
-    stack.push(r)
+    else:
+        r = math.sqrt(a)
+        stack.push(r)
 
 def Absolute(stack):
     a = stack.pop()
