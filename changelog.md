@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## Version 0.2.2
+
+### Fixes:
+- when typing an operator, the partial-operator matches properly 
+- domain errors now catch with natural log function (`ln`)
+
 ## Version 0.2.1
 
 ### Fixes:
