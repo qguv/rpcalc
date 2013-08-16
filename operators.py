@@ -223,6 +223,9 @@ def ToRadians(stack):
     r = math.radians(a)
     stack.push(r)
 
+
+#### Others ####
+
 def Random(stack):
     stack.push(random())
 
@@ -272,5 +275,6 @@ bindings = {
         'atan': [Arctangent, 1],
         'deg' : [ToDegrees , 1],
         'rad' : [ToRadians , 1],
+        #### Others
         'rand': [Random    , 0],
         }
