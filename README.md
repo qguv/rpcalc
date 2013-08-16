@@ -29,25 +29,44 @@ It is possible that your system calls your Python 3.3 binary something different
 ### Operators
 _The most recent and second-most recent stack entries will be denoted_ x _and_ y _respectively. You can always peek inside operators.py for a more objective explanation of these functions._
 
+#### Program
 - `p` - prints the stack
-- `q` - quits the program, **no matter what**
-- `+ - * /` - basic arithmetic operations
-- `n` - returns (x * -1)
-- `r` - returns a random number between 0 and 1
-- `f` - floor-rounds x to an integer
-- `ln` - returns the natural log of the most recent stack entry (x)
-- `c` - clears the stack
-- `d` - drops _x_ and pushes stack items down to compensate
+- `Q` - quits the program, **no matter what**
+
+#### Stack
+- `D` - drops _x_ and pushes stack items to compensate
+- `C` - clears the stack
 - `x` - duplicates _x_ and pushes it (equivalent to `Enter` with an empty buffer)
-- `s` - swaps _x_ and _y_
+- `w` - swaps _x_ and _y_
+
+#### Arithmetic
+- `+ - * /` - basic arithmetic operations
+- `n` - returns (_x_ * -1)
 - `%` - returns the remainder of the division of _y_ by _x_
+- `f` - floor-rounds _x_ to an integer
+- `ln` - returns the natural log of the most recent stack entry (_x_)
 - `^` - returns _y_ to the _xth_ power
+
+#### Logic
 - `==` - returns 1 if _x_ is equal to _y_, otherwise returns 0
 - `=!` - returns 0 if _x_ is equal to _y_, otherwise returns 1
 - `<` - returns 1 if _y_ is less than _x_, otherwise returns 0
 - `>` - returns 1 if _y_ is greater than _x_, otherwise returns 0
 - `=<` - returns 1 if _y_ is less than or equal to _x_, otherwise returns 0
 - `=>` - returns 1 if _y_ is greater than or equal to _x_, otherwise returns 0
+
+#### Trigonometry
+- `deg` - converts _x_ (radians) to degrees
+- `rad` - converts _x_ (degrees) to radians
+- `sin` - returns the sine of _x_ (radians)
+- `cos` - returns the cosine of _x_ (radians)
+- `tan` - returns the tangent of _x_ (radians)
+- `asin` - returns the arcsine of _x_ (radians)
+- `acos` - returns the arccosine of _x_ (radians)
+- `atan` - returns the arctangent of _x_ (radians)
+
+#### Other
+- `rand` - returns a random number between 0 and 1
 
 Other operations can easily be added by modifying `operators.py`.
 
@@ -76,9 +95,24 @@ _Results are designated with `>>>`, but these are really stored in the stack and
     >>> 1
 
 ### Known Issues
-- The backspace key doesn't work.
+- In-program help (`?`) is not yet supported.
+
+## FAQ
+> **How do I do log base _x_?**
+
+A `log` function is not scheduled to be implemented because the functionality is _already there_ and because there is no reason to memorize which stack item will be the base and on which item the log will operate.
+
+You will need to use the _change of base formula_:
+
+![Logarithmic Change of Base Formula](resources/logCOB.png)
+
+    256 ln 2 ln /
+
+> **I have a bug! Let me email that to you...**
+
+Thank you, but please don't email me the bug! Make sure it's not a [known issue](#known-issues), and write me a bug report [here](https://github.com/qguv/rpcalc/issues/new) or if you're familiar with git: fork, fix, and file a pull request.
 
 ## Motivation
 At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, my workflow, Python 3, and Object-Oriented Programming in general.
 
--[qguv](http://github.com/qguv/)
+-[Quintus](http://github.com/qguv/)

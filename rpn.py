@@ -14,10 +14,12 @@ def getch():
     rawChar = rawGetch()
     if rawChar == '\r':
         inpChar = "@" #substitute character for <Return>
-    elif rawChar == 'q': # naive escape
-        print("bye.")
+    elif rawChar == 'Q': # naive escape
         clear()
+        print("bye.")
         exit()
+    elif rawChar == '\b':
+        inpChar = "|" #substitute character for <Backspace>
     else:
         inpChar = rawChar
     return inpChar
@@ -70,6 +72,8 @@ def readCalc(stack): # third re-write!
                 except (TypeError, ValueError):
                     errors="not a number!"
             buf = ''
+        elif buf[-1] == '|': # backspace handler
+            buf = buf[:-2] 
         elif buf == 'p': # Special "print" operator
             printFlag = True
             buf = ''
@@ -89,7 +93,7 @@ def readCalc(stack): # third re-write!
                 operate(operBuf, stack)
                 operBuf = ''
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
-            errors = "function not implemented!"
+            errors = "not an operator!"
             buf = ''
 
 # DO IT #
