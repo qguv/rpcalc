@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## _NEXT VERSION_
+
+### Additions:
+- new constants! accessed through a `k` prefix: `kpi` and `ke`
+
 ## Version 0.2.1
 
 ### Fixes:

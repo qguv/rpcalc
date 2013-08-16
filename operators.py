@@ -12,7 +12,11 @@
 import math
 from random import random
 
-# Add your own! Make sure to add a binding too.
+# Add your own here! Make sure to add a binding too.
+
+
+#### Stack ####
+
 def Drop(stack):
     null = stack.pop()
 
@@ -30,6 +34,9 @@ def SwapXY(stack):
     y = stack.pop()
     stack.push(x)
     stack.push(y)
+
+
+#### Arithmetic ####
 
 def Add(stack):
     b = stack.pop()
@@ -96,6 +103,20 @@ def Absolute(stack):
     r = abs(a)
     stack.push(r)
 
+
+#### Constants ####
+
+def ConstPi(stack):
+    r = math.pi
+    stack.push(r)
+
+def ConstE(stack):
+    r = math.e
+    stack.push(r)
+
+
+#### Logic ####
+
 def EqTest(stack):
     b = stack.pop()
     a = stack.pop()
@@ -131,6 +152,9 @@ def GtEqTest(stack):
     a = stack.pop()
     r = 1 if a >= b else 0
     stack.push(r)
+
+
+#### Trigonometry ####
 
 def TrigRoundFix(roughAnswer):
 # Not an operator, but a helpful
@@ -229,6 +253,9 @@ bindings = {
         '^' :   [Power     , 2],
         'sqrt': [SqRoot    , 1],
         'abs' : [Absolute  , 1],
+        #### Constants
+        'ke':   [ConstE    , 0],
+        'kpi' : [ConstPi   , 0],
         #### Logic
         '==':   [EqTest    , 2],
         '=!':   [NotTest   , 2],
