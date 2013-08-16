@@ -46,6 +46,8 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `f` - floor-rounds _x_ to an integer
 - `ln` - returns the natural log of the most recent stack entry (_x_)
 - `^` - returns _y_ to the _xth_ power
+- `sqrt` - returns the square root of _x_
+- `abs` - returns the absolute value of _x_
 
 #### Logic
 - `==` - returns 1 if _x_ is equal to _y_, otherwise returns 0
