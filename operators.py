@@ -190,7 +190,7 @@ def Absolute(stack):
     stack.push(r)
 
 # Bindings cannot include any of the following
-# characters for technical reasons: q @
+# characters for technical reasons: q @ |
 # Bindings must not begin with the name of
 # another binding. For instance, =< was chosen
 # over <= because it does not begin with (and
