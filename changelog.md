@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## Version 0.2.1
+
+### Fixes:
+- inverse trig functions (`asin`, `acos`, `atan`) now handle domain errors properly
+
+### Modifications:
+- operators now handle potential erros with if/else clauses rather than catching them with escapes
+
 ## Version 0.2
 
 ### Modifications:
