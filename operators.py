@@ -229,6 +229,13 @@ def ToRadians(stack):
 def Random(stack):
     stack.push(random())
 
+def DebugIter(stack):
+    a = stack.pop()
+    a_ = int(math.floor(a)) # a-prime
+    for i in range(a_):
+        stack.push(i)
+    return "Pushed " + str(a_) + " entries."
+
 # Bindings cannot include any of the following
 # characters for technical reasons: Q p
 # Bindings must not begin with the name of
@@ -277,4 +284,5 @@ bindings = {
         'rad' : [ToRadians , 1],
         #### Others
         'rand': [Random    , 0],
+        'debug':[DebugIter , 1],
         }
