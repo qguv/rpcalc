@@ -12,14 +12,10 @@ errors = ''
 from inout import getch as rawGetch
 def getch():
     rawChar = rawGetch()
-    if rawChar == '\r':
-        inpChar = "@" #substitute character for <Return>
-    elif rawChar == 'Q': # naive escape
+    if rawChar == 'Q': # naive escape
         clear()
         print("bye.")
         exit()
-    elif rawChar == '\b':
-        inpChar = "|" #substitute character for <Backspace>
     else:
         inpChar = rawChar
     return inpChar
@@ -60,7 +56,7 @@ def readCalc(stack): # third re-write!
             print(stack)
             printFlag = False
         buf += getch()
-        if buf[-1] == '@':
+        if buf[-1] == '\r': # return
             if len(buf) == 1: # if there aren't any numbers to enter
                 if len(stack) != 0: # if there is an x
                     operate("x", stack) # dup X
@@ -72,7 +68,7 @@ def readCalc(stack): # third re-write!
                 except (TypeError, ValueError):
                     errors="not a number!"
             buf = ''
-        elif buf[-1] == '|': # backspace handler
+        elif buf[-1] == '\b': # backspace
             buf = buf[:-2] 
         elif buf == 'p': # Special "print" operator
             printFlag = True
