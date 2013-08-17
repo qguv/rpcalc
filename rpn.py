@@ -32,7 +32,7 @@ def operate(symbol, stack):
         fn = ops.bindings[symbol][0] # get operation fn name
         try:
             errors = fn(stack) # absolute magic
-        except OverflowError:
+        except (OverflowError, KeyboardInterrupt):
             errors = "answer too large to compute!"
     else:
         errors = "too few entries for " + symbol + "!"

@@ -104,6 +104,26 @@ def Absolute(stack):
     stack.push(r)
 
 
+#### Sequence Operators ####
+
+def MakeList(stack):
+# another utility function,
+# this time for sequences
+    r = [ stack.pop() for null in range(len(stack)) ]
+    return r
+
+def Summation(stack):
+    r = math.fsum(MakeList(stack))
+    stack.push(r)
+
+def Product(stack):
+    seq = MakeList(stack)
+    r = 1
+    for element in seq:
+        r = r * element
+    return r
+
+
 #### Constants ####
 
 def ConstPi(stack):
@@ -232,7 +252,7 @@ def Random(stack):
 def DebugIter(stack):
     a = stack.pop()
     a_ = int(math.floor(a)) # a-prime
-    for i in range(a_):
+    for i in range(1, (a_ + 1)):
         stack.push(i)
     return "Pushed " + str(a_) + " entries."
 
@@ -263,6 +283,9 @@ bindings = {
         '^' :   [Power     , 2],
         'sqrt': [SqRoot    , 1],
         'abs' : [Absolute  , 1],
+        #### Sequence Operators
+        'S' :   [Summation , 1],
+        'P' :   [Product   , 1],
         #### Constants
         'ke':   [ConstE    , 0],
         'kpi' : [ConstPi   , 0],

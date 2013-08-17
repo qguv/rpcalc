@@ -5,10 +5,12 @@ Changelog
 
 ### Additions:
 - new constants! accessed through a `k` prefix: `kpi` and `ke`
+- new sequence operators! stack summation is `S`, stack product is `P`.
 
 ### Fixes:
 - fixed backspace not working on all systems
 - fixed ambiguous 'e': now detects whether e denotes a power of ten or an operator
+- fixed `KeyboardInterrupt` on operators that take a _looong_ time
 
 ## Version 0.2.2
 
