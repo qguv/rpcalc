@@ -37,6 +37,14 @@ def operate(symbol, stack):
     else:
         errors = "too few entries for " + symbol + "!"
 
+def isNum(string):
+    try:
+        float(string)
+    except ValueError:
+        return False
+    else:
+        return True
+
 # the big guns
 def readCalc(stack): # third re-write!
     global errors
@@ -76,7 +84,7 @@ def readCalc(stack): # third re-write!
             printFlag = True
             buf = ''
         elif any( s.startswith(buf[-1]) for s in ops.bindings.keys() ):
-        # character just inserted is an operator
+        # character just inserted is at least a partial operator
             if len(buf) != 1: # if there are any numbers to enter
                 stack.push(float(buf[:-1]))
             operBuf = buf[-1] # initialize operator buffer
@@ -90,6 +98,9 @@ def readCalc(stack): # third re-write!
             else:
                 operate(operBuf, stack)
                 operBuf = ''
+        elif (buf[-1] == 'e') and (not isNum(buf[:-1])):
+            errors = "not an operator!"
+            buf = ''
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
             errors = "not an operator!"
             buf = ''

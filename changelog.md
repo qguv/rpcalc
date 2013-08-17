@@ -7,7 +7,8 @@ Changelog
 - new constants! accessed through a `k` prefix: `kpi` and `ke`
 
 ### Fixes:
-- fixed issue with backspace not working on all systems
+- fixed backspace not working on all systems
+- fixed ambiguous 'e': now detects whether e denotes a power of ten or an operator
 
 ## Version 0.2.2
 
