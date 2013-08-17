@@ -6,6 +6,9 @@ Changelog
 ### Additions:
 - new constants! accessed through a `k` prefix: `kpi` and `ke`
 
+### Fixes:
+- fixed issue with backspace not working on all systems
+
 ## Version 0.2.2
 
 ### Fixes:
