@@ -68,7 +68,9 @@ def readCalc(stack): # third re-write!
                 except (TypeError, ValueError):
                     errors="not a number!"
             buf = ''
-        elif buf[-1] == '\b': # backspace
+        elif ( buf[-1] == '\x08' ) or \
+             ( buf[-1] == '\x7f' ) or \
+             ( buf[-1] == '\b'   ): # handling backspace
             buf = buf[:-2] 
         elif buf == 'p': # Special "print" operator
             printFlag = True
