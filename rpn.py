@@ -85,19 +85,29 @@ def readCalc(stack): # third re-write!
             buf = ''
         elif any( s.startswith(buf[-1]) for s in ops.bindings.keys() ):
         # character just inserted is at least a partial operator
-            if len(buf) != 1: # if there are any numbers to enter
-                stack.push(float(buf[:-1]))
             operBuf = buf[-1] # initialize operator buffer
-            buf = ''
+            buf = buf[:-1] # only keep numbers in buffer now
             while operBuf not in ops.bindings.keys(): # side loop
                 operBuf += getch()
-                if not any(operBuf in s for s in ops.bindings.keys()):
-                    errors = "not an operator!"
+                if (operBuf[0] == 'e') and (operBuf[-1] in \
+                        {str(i) for i in range(10)} | {"+","-"}):
+                # if e is being used as a power of ten handler
+                    buf = buf + operBuf # reunite buffer and move on
                     operBuf = ''
                     break
+                if not any(operBuf in s for s in ops.bindings.keys()):
+                    if len(buf) != 0: # if there are any numbers to enter
+                        stack.push(float(buf))
+                    errors = "not an operator!"
+                    operBuf = ''
+                    buf = ''
+                    break
             else:
+                if len(buf) != 0: # if there are any numbers to enter
+                    stack.push(float(buf))
                 operate(operBuf, stack)
                 operBuf = ''
+                buf = ''
         elif (buf[-1] == 'e') and (not isNum(buf[:-1])):
             errors = "not an operator!"
             buf = ''
