@@ -12,7 +12,34 @@
 import math
 from random import random
 
-# Add your own! Make sure to add a binding too.
+# Add your own here! Make sure to add a binding too.
+
+
+#### Stack ####
+
+def Drop(stack):
+    null = stack.pop()
+
+def Clear(stack):
+    stack.items = list()
+
+def Length(stack):
+    return stack.name + " has " + str(len(stack)) + " entries."
+
+def DupX(stack):
+    a = stack.pop()
+    stack.push(a)
+    stack.push(a)
+
+def SwapXY(stack):
+    x = stack.pop()
+    y = stack.pop()
+    stack.push(x)
+    stack.push(y)
+
+
+#### Arithmetic ####
+
 def Add(stack):
     b = stack.pop()
     a = stack.pop()
@@ -43,8 +70,10 @@ def Negate(stack):
     a = stack.pop()
     stack.push(-1 * a)
 
-def Random(stack):
-    stack.push(random())
+def Modulus(stack):
+    b = stack.pop()
+    a = stack.pop()
+    stack.push(a % b)
 
 def Floor(stack):
     a = stack.pop()
@@ -58,33 +87,88 @@ def Ln(stack):
         r = math.log(a)
         stack.push(r) # push the answer
 
-def Clear(stack):
-    for i in range(len(stack.items)):
-        Drop(stack)
-
-def Drop(stack):
-    null = stack.pop()
-
-def DupX(stack):
-    a = stack.pop()
-    stack.push(a)
-    stack.push(a)
-
-def SwapXY(stack):
-    x = stack.pop()
-    y = stack.pop()
-    stack.push(x)
-    stack.push(y)
-
 def Power(stack):
     b = stack.pop()
     a = stack.pop()
     stack.push(a ** b)
 
-def Modulus(stack):
-    b = stack.pop()
+def SqRoot(stack):
     a = stack.pop()
-    stack.push(a % b)
+    if (a < 0):
+        return "imaginary numbers not supported!"
+    else:
+        r = math.sqrt(a)
+        stack.push(r)
+
+def Absolute(stack):
+    a = stack.pop()
+    r = abs(a)
+    stack.push(r)
+
+def Factorial(stack):
+    a = stack.pop()
+    if (a < 0):
+        return "out of domain!"
+    elif (int(a) != a):
+        return "not integral!"
+    else:
+        r = math.factorial(int(a))
+        stack.push(r)
+
+
+#### Sequence Operators ####
+
+def MakeList(stack):
+# another utility function,
+# this time for sequences
+    r = [ stack.pop() for null in range(len(stack)) ]
+    return r
+
+def Summation(stack):
+    r = math.fsum(MakeList(stack))
+    stack.push(r)
+
+def Product(stack):
+    seq = MakeList(stack)
+    r = 1
+    for element in seq:
+        r = r * element
+    stack.push(r)
+
+
+#### Statistics ####
+
+def Mean(stack):
+    seq = MakeList(stack)
+    r = sum(seq) / len(seq)
+    stack.push(r)
+
+def Median(stack):
+    ord = sorted(MakeList(stack))
+    if len(ord) % 2 == 1:
+    # if only one middle number, return that
+        choose = math.floor(len(ord) / 2)
+        r = ord[choose]
+    else:
+    # if two middle numbers, return average
+        iE = int(len(ord) / 2 + 1)
+        iS = iE - 2
+        r = sum(ord[iS:iE]) / 2
+    stack.push(r)
+
+
+#### Constants ####
+
+def ConstPi(stack):
+    r = math.pi
+    stack.push(r)
+
+def ConstE(stack):
+    r = math.e
+    stack.push(r)
+
+
+#### Logic ####
 
 def EqTest(stack):
     b = stack.pop()
@@ -122,7 +206,15 @@ def GtEqTest(stack):
     r = 1 if a >= b else 0
     stack.push(r)
 
+
+#### Trigonometry ####
+
 def TrigRoundFix(roughAnswer):
+# Not an operator, but a utility
+# function that fixes rounding
+# errors in Trig functions which
+# prevent the expected answers:
+# 1, 0, and -1.
     r = roughAnswer
     if abs(r) < 1e-15:
         r = 0.0
@@ -131,7 +223,6 @@ def TrigRoundFix(roughAnswer):
     elif abs(r+1) < 1e-15:
         r = -1.0
     return r
-
 
 def Sine(stack):
     a = stack.pop()
@@ -185,21 +276,21 @@ def ToRadians(stack):
     r = math.radians(a)
     stack.push(r)
 
-def SqRoot(stack):
-    a = stack.pop()
-    if (a < 0):
-        return "imaginary numbers not supported!"
-    else:
-        r = math.sqrt(a)
-        stack.push(r)
 
-def Absolute(stack):
+#### Others ####
+
+def Random(stack):
+    stack.push(random())
+
+def DebugIter(stack):
     a = stack.pop()
-    r = abs(a)
-    stack.push(r)
+    a_ = int(math.floor(a)) # a-prime
+    for i in range(1, (a_ + 1)):
+        stack.push(i)
+    return "pushed " + str(a_) + " entries."
 
 # Bindings cannot include any of the following
-# characters for technical reasons: q @ |
+# characters for technical reasons: Q p
 # Bindings must not begin with the name of
 # another binding. For instance, =< was chosen
 # over <= because it does not begin with (and
@@ -208,26 +299,42 @@ bindings = {
     # Key is the arithmetic keypress
     # Value[0] is the paired function
     # Value[1] is the argument requirement
+        #### Stack
+        'D' :   [Drop      , 1],
+        'C' :   [Clear     , 1],
+        '#' :   [Length    , 0],
+        'x' :   [DupX      , 1],
+        'w' :   [SwapXY    , 2],
+        #### Arithmetic
         '+' :   [Add       , 2],
         '-' :   [Subtract  , 2],
         '*' :   [Multiply  , 2],
         '/' :   [Divide    , 2],
         'n' :   [Negate    , 1],
-        'rand': [Random    , 0],
+        '%' :   [Modulus   , 2],
         'f' :   [Floor     , 1],
         'ln':   [Ln        , 1],
-        'D' :   [Drop      , 1],
-        'C' :   [Clear     , 1],
-        'x' :   [DupX      , 1],
-        'w' :   [SwapXY    , 2],
-        '%' :   [Modulus   , 2],
         '^' :   [Power     , 2],
+        'sqrt': [SqRoot    , 1],
+        'abs' : [Absolute  , 1],
+        '!' :   [Factorial , 1],
+        #### Sequence Operators
+        'S' :   [Summation , 1],
+        'P' :   [Product   , 1],
+        #### Statistics
+        'mean': [Mean      , 1],
+        'med' : [Median    , 1],
+        #### Constants
+        'ke':   [ConstE    , 0],
+        'kpi' : [ConstPi   , 0],
+        #### Logic
         '==':   [EqTest    , 2],
         '=!':   [NotTest   , 2],
         '<' :   [LtTest    , 2],
         '>' :   [GtTest    , 2],
         '=<':   [LtEqTest  , 2],
         '=>':   [GtEqTest  , 2],
+        #### Trigonometry
         'sin' : [Sine      , 1],
         'cos' : [Cosine    , 1],
         'tan' : [Tangent   , 1],
@@ -236,6 +343,7 @@ bindings = {
         'atan': [Arctangent, 1],
         'deg' : [ToDegrees , 1],
         'rad' : [ToRadians , 1],
-        'sqrt': [SqRoot    , 1],
-        'abs' : [Absolute  , 1],
+        #### Others
+        'rand': [Random    , 0],
+        'debug':[DebugIter , 1], #DEBUG
         }

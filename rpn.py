@@ -12,14 +12,10 @@ errors = ''
 from inout import getch as rawGetch
 def getch():
     rawChar = rawGetch()
-    if rawChar == '\r':
-        inpChar = "@" #substitute character for <Return>
-    elif rawChar == 'Q': # naive escape
+    if rawChar == 'Q': # naive escape
         clear()
         print("bye.")
         exit()
-    elif rawChar == '\b':
-        inpChar = "|" #substitute character for <Backspace>
     else:
         inpChar = rawChar
     return inpChar
@@ -36,10 +32,18 @@ def operate(symbol, stack):
         fn = ops.bindings[symbol][0] # get operation fn name
         try:
             errors = fn(stack) # absolute magic
-        except OverflowError:
+        except (OverflowError, KeyboardInterrupt):
             errors = "answer too large to compute!"
     else:
         errors = "too few entries for " + symbol + "!"
+
+def isNum(string):
+    try:
+        float(string)
+    except ValueError:
+        return False
+    else:
+        return True
 
 # the big guns
 def readCalc(stack): # third re-write!
@@ -57,10 +61,15 @@ def readCalc(stack): # third re-write!
         if printFlag:
             # replaces normal print with a view of the stack
             clear()
-            print(stack)
+            try:
+                print(stack)
+            except KeyboardInterrupt:
+                clear()
+                print('too large to display!')
+                stack.rpnView(buf)
             printFlag = False
         buf += getch()
-        if buf[-1] == '@':
+        if buf[-1] == '\r': # return
             if len(buf) == 1: # if there aren't any numbers to enter
                 if len(stack) != 0: # if there is an x
                     operate("x", stack) # dup X
@@ -72,30 +81,45 @@ def readCalc(stack): # third re-write!
                 except (TypeError, ValueError):
                     errors="not a number!"
             buf = ''
-        elif buf[-1] == '|': # backspace handler
+        elif ( buf[-1] == '\x08' ) or \
+             ( buf[-1] == '\x7f' ) or \
+             ( buf[-1] == '\b'   ): # handling backspace
             buf = buf[:-2] 
         elif buf == 'p': # Special "print" operator
             printFlag = True
             buf = ''
         elif any( s.startswith(buf[-1]) for s in ops.bindings.keys() ):
-        # character just inserted is an operator
-            if len(buf) != 1: # if there are any numbers to enter
-                stack.push(float(buf[:-1]))
+        # character just inserted is at least a partial operator
             operBuf = buf[-1] # initialize operator buffer
-            buf = ''
+            buf = buf[:-1] # only keep numbers in buffer now
             while operBuf not in ops.bindings.keys(): # side loop
                 operBuf += getch()
-                if not any(operBuf in s for s in ops.bindings.keys()):
-                    errors = "not an operator!"
+                if (operBuf[0] == 'e') and (operBuf[-1] in \
+                        {str(i) for i in range(10)} | {"+","-"}):
+                # if e is being used as a power of ten handler
+                    buf = buf + operBuf # reunite buffer and move on
                     operBuf = ''
                     break
+                if not any(operBuf in s for s in ops.bindings.keys()):
+                    if len(buf) != 0: # if there are any numbers to enter
+                        stack.push(float(buf))
+                    errors = "not an operator!"
+                    operBuf = ''
+                    buf = ''
+                    break
             else:
+                if len(buf) != 0: # if there are any numbers to enter
+                    stack.push(float(buf))
                 operate(operBuf, stack)
                 operBuf = ''
+                buf = ''
+        elif (buf[-1] == 'e') and (not isNum(buf[:-1])):
+            errors = "not an operator!"
+            buf = ''
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
             errors = "not an operator!"
             buf = ''
 
 # DO IT #
-mainStack = Stack([], 'Stack\nContents')
+mainStack = Stack([], 'mainstack')
 readCalc(mainStack)

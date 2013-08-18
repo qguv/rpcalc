@@ -1,6 +1,21 @@
 Changelog
 =========
 
+## Version 0.3
+
+### Additions:
+- new constants, accessed through a `k` prefix: `kpi` and `ke`
+- new sequence operators: stack summation is `S`, stack product is `P`.
+- new statistics operators: arithmetic mean is `mean`, median is `med`
+- new factorial operator: `!`
+- new stack length button: `#` (does not push anything to the stack)
+
+### Fixes:
+- fixed backspace not working on all systems
+- fixed ambiguous 'e': now detects whether e denotes a power of ten or an operator
+- fixed `KeyboardInterrupt` on operators that take a _looong_ time
+- sped up some time-consuming functions
+
 ## Version 0.2.2
 
 ### Fixes:
