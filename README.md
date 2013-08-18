@@ -41,7 +41,7 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `w` - swaps _x_ and _y_
 
 #### Arithmetic
-- `+ - * /` - basic arithmetic operations
+- `+` `-` `*` `/` - basic arithmetic operations
 - `n` - returns (_x_ * -1)
 - `%` - returns the remainder of the division of _y_ by _x_
 - `f` - floor-rounds _x_ to an integer
