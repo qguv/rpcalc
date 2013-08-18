@@ -134,6 +134,27 @@ def Product(stack):
     stack.push(r)
 
 
+#### Statistics ####
+
+def Mean(stack):
+    seq = MakeList(stack)
+    r = sum(seq) / len(seq)
+    stack.push(r)
+
+def Median(stack):
+    ord = sorted(MakeList(stack))
+    if len(ord) % 2 == 1:
+    # if only one middle number, return that
+        choose = math.floor(len(ord) / 2)
+        r = ord[choose]
+    else:
+    # if two middle numbers, return average
+        iE = int(len(ord) / 2 + 1)
+        iS = iE - 2
+        r = sum(ord[iS:iE]) / 2
+    stack.push(r)
+
+
 #### Constants ####
 
 def ConstPi(stack):
@@ -297,6 +318,9 @@ bindings = {
         #### Sequence Operators
         'S' :   [Summation , 1],
         'P' :   [Product   , 1],
+        #### Statistics
+        'mean': [Mean      , 1],
+        'med' : [Median    , 1],
         #### Constants
         'ke':   [ConstE    , 0],
         'kpi' : [ConstPi   , 0],

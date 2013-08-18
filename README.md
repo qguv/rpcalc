@@ -55,6 +55,10 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `S` - returns the sum of all stack entries
 - `P` - returns the product of all stack entries
 
+#### Statistics
+- `mean` - returns the arithmetic mean of all stack entries
+- `med` - returns the median of all stack entries
+
 #### Constants
 _in `rpcalc`, constant operators begin with `k` to prevent conflicts with other operators_
 
@@ -112,6 +116,10 @@ _Results are designated with `>>>`, but these are really stored in the stack and
 - In-program help (`?`) is not yet supported.
 
 ## FAQ
+> **I found a bug! Let me email that to you...**
+
+Thank you, but please don't email me the bug! Make sure it's not a [known issue](#known-issues), and write me a bug report [here](https://github.com/qguv/rpcalc/issues/new) or if you're familiar with git: fork, fix, and file a pull request.
+
 > **How do I do log base _x_?**
 
 A `log` function is not scheduled to be implemented because the functionality is _already there_ and because there is no reason to memorize which stack item will be the base and on which item the log will operate.
@@ -122,9 +130,9 @@ You will need to use the _change of base formula_:
 
     256 ln 2 ln /
 
-> **I have a bug! Let me email that to you...**
+> **There's `mean` and `med`, so why are there no _mode_, _maximum_, or _minimum_ operators?**
 
-Thank you, but please don't email me the bug! Make sure it's not a [known issue](#known-issues), and write me a bug report [here](https://github.com/qguv/rpcalc/issues/new) or if you're familiar with git: fork, fix, and file a pull request.
+Arithmetic mean and median return one result, which is pushed into the stack. Mode, maximum, and minimum all have the capacity to produce more than one result. There is no non-arbitrary method of deciding the order in which the multiple answers would be pushed into the stack. Answers like these would be no good if the user didn't know which answer s/he wanted or where it went in the stack. Procedurally, these functions would be easy to write, but there is no clear way to display the answer to the user.
 
 ## Motivation
 At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, my workflow, Python 3, and Object-Oriented Programming in general.

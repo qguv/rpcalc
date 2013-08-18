@@ -6,7 +6,8 @@ Changelog
 ### Additions:
 - new constants, accessed through a `k` prefix: `kpi` and `ke`
 - new sequence operators: stack summation is `S`, stack product is `P`.
-- new factorial operator:`!`
+- new statistics operators: arithmetic mean is `mean`, median is `med`
+- new factorial operator: `!`
 
 ### Fixes:
 - fixed backspace not working on all systems
