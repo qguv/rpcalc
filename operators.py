@@ -21,8 +21,10 @@ def Drop(stack):
     null = stack.pop()
 
 def Clear(stack):
-    for i in range(len(stack.items)):
-        Drop(stack)
+    stack.items = list()
+
+def Length(stack):
+    return stack.name + " has " + str(len(stack)) + " entries."
 
 def DupX(stack):
     a = stack.pop()
@@ -208,7 +210,7 @@ def GtEqTest(stack):
 #### Trigonometry ####
 
 def TrigRoundFix(roughAnswer):
-# Not an operator, but a helpful
+# Not an operator, but a utility
 # function that fixes rounding
 # errors in Trig functions which
 # prevent the expected answers:
@@ -285,7 +287,7 @@ def DebugIter(stack):
     a_ = int(math.floor(a)) # a-prime
     for i in range(1, (a_ + 1)):
         stack.push(i)
-    return "Pushed " + str(a_) + " entries."
+    return "pushed " + str(a_) + " entries."
 
 # Bindings cannot include any of the following
 # characters for technical reasons: Q p
@@ -300,6 +302,7 @@ bindings = {
         #### Stack
         'D' :   [Drop      , 1],
         'C' :   [Clear     , 1],
+        '#' :   [Length    , 0],
         'x' :   [DupX      , 1],
         'w' :   [SwapXY    , 2],
         #### Arithmetic

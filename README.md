@@ -37,6 +37,7 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 #### Stack
 - `D` - drops _x_ and pushes stack items to compensate
 - `C` - clears the stack
+- `#` - displays a message with the current stack length (does not push anything to the stack)
 - `x` - duplicates _x_ and pushes it (equivalent to `Enter` with an empty buffer)
 - `w` - swaps _x_ and _y_
 

@@ -61,7 +61,12 @@ def readCalc(stack): # third re-write!
         if printFlag:
             # replaces normal print with a view of the stack
             clear()
-            print(stack)
+            try:
+                print(stack)
+            except KeyboardInterrupt:
+                clear()
+                print('too large to display!')
+                stack.rpnView(buf)
             printFlag = False
         buf += getch()
         if buf[-1] == '\r': # return
@@ -116,5 +121,5 @@ def readCalc(stack): # third re-write!
             buf = ''
 
 # DO IT #
-mainStack = Stack([], 'Stack\nContents')
+mainStack = Stack([], 'mainstack')
 readCalc(mainStack)
