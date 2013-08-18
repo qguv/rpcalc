@@ -318,5 +318,5 @@ bindings = {
         'rad' : [ToRadians , 1],
         #### Others
         'rand': [Random    , 0],
-        'debug':[DebugIter , 1],
+        'debug':[DebugIter , 1], #DEBUG
         }
