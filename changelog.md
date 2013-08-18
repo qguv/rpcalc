@@ -4,8 +4,9 @@ Changelog
 ## _NEXT VERSION_
 
 ### Additions:
-- new constants! accessed through a `k` prefix: `kpi` and `ke`
-- new sequence operators! stack summation is `S`, stack product is `P`.
+- new constants, accessed through a `k` prefix: `kpi` and `ke`
+- new sequence operators: stack summation is `S`, stack product is `P`.
+- new factorial operator:`!`
 
 ### Fixes:
 - fixed backspace not working on all systems

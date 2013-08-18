@@ -103,6 +103,16 @@ def Absolute(stack):
     r = abs(a)
     stack.push(r)
 
+def Factorial(stack):
+    a = stack.pop()
+    if (a < 0):
+        return "out of domain!"
+    elif (int(a) != a):
+        return "not integral!"
+    else:
+        r = math.factorial(int(a))
+        stack.push(r)
+
 
 #### Sequence Operators ####
 
@@ -283,6 +293,7 @@ bindings = {
         '^' :   [Power     , 2],
         'sqrt': [SqRoot    , 1],
         'abs' : [Absolute  , 1],
+        '!' :   [Factorial , 1],
         #### Sequence Operators
         'S' :   [Summation , 1],
         'P' :   [Product   , 1],

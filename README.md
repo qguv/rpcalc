@@ -49,6 +49,7 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `^` - returns _y_ to the _xth_ power
 - `sqrt` - returns the square root of _x_
 - `abs` - returns the absolute value of _x_
+- `!` - returns the factorial of _x_
 
 #### Sequence Operators
 - `S` - returns the sum of all stack entries
