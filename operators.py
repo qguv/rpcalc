@@ -121,7 +121,7 @@ def Product(stack):
     r = 1
     for element in seq:
         r = r * element
-    return r
+    stack.push(r)
 
 
 #### Constants ####
