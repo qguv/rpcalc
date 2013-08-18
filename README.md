@@ -5,6 +5,7 @@ A reverse polish notation calculator written in Python 3.
 
 ## About
 `rpcalc` is destined to be a reverse polish notation calculator based on the HP 11C Scientific Calculator with extended features, such as:
+
 - Unlimited stack length
 - User-extendible operators
 - An advanced stack datatype
@@ -48,6 +49,16 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `^` - returns _y_ to the _xth_ power
 - `sqrt` - returns the square root of _x_
 - `abs` - returns the absolute value of _x_
+
+#### Sequence Operators
+- `S` - returns the sum of all stack entries
+- `P` - returns the product of all stack entries
+
+#### Constants
+_in `rpcalc`, constant operators begin with `k` to prevent conflicts with other operators_
+
+- `ke` - returns [Euler's number](http://en.wikipedia.org/wiki/E_%28mathematical_constant%29): the base of the natural logarithm and the exponential function
+- `kpi` - returns [pi](http://en.wikipedia.org/wiki/Pi): the ratio of a circle's circumference to its diameter
 
 #### Logic
 - `==` - returns 1 if _x_ is equal to _y_, otherwise returns 0
