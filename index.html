@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="rpcalc : A reverse polish notation calculator written in Python 3." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>rpcalc</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/qguv/rpcalc">View on GitHub</a>
+
+          <h1 id="project_title">rpcalc</h1>
+          <h2 id="project_tagline">A reverse polish notation calculator written in Python 3.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/qguv/rpcalc/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/qguv/rpcalc/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="rpcalc" class="anchor" href="#rpcalc"><span class="octicon octicon-link"></span></a>rpcalc</h1>
+
+<p>A reverse polish notation calculator written in Python 3.</p>
+
+<h2>
+<a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
+
+<p><code>rpcalc</code> is destined to be a reverse polish notation calculator based on the HP 11C Scientific Calculator with extended features, such as:</p>
+
+<ul>
+<li>Unlimited stack length</li>
+<li>User-extendible operators</li>
+<li>An advanced stack datatype</li>
+</ul><h2>
+<a name="operation" class="anchor" href="#operation"><span class="octicon octicon-link"></span></a>Operation</h2>
+
+<p><code>rpcalc</code> uses a stack for all operations. This document assumes the user is familiar with stack-based calculators; in the future, more thorough documentation may be written for the lay user.</p>
+
+<h3>
+<a name="installation--execution" class="anchor" href="#installation--execution"><span class="octicon octicon-link"></span></a>Installation &amp; Execution</h3>
+
+<p>You will need Python 3.3 to run <code>rpcalc</code>. As there are currently no <code>rpcalc</code> binaries, simply download the necessary files from the <a href="http://github.com/qguv/rpcalc/">git repository</a>. Switch to the <code>rpcalc/</code> directory, and run the following from a command shell:</p>
+
+<pre><code>python3 rpn.py
+</code></pre>
+
+<p>It is possible that your system calls your Python 3.3 binary something different, such as <code>python</code> (ArchLinux) or <code>py33.exe</code> (some Windows). If this is the case, replace <code>python3</code> in the above example with the proper executable. Google is your friend here.</p>
+
+<h3>
+<a name="concepts" class="anchor" href="#concepts"><span class="octicon octicon-link"></span></a>Concepts</h3>
+
+<ul>
+<li>Numbers are pushed into the stack once <code>Enter</code> is pressed or an operation is entered</li>
+<li>Operations are executed as soon as they are typed; <strong>do not</strong> follow operations with <code>Enter</code>
+</li>
+<li>There is no artificial limit placed on stack length. Push 'till the cows come home.</li>
+<li>If in doubt, use the program as you would an 11C, if you are familiar with its operation.</li>
+</ul><h3>
+<a name="operators" class="anchor" href="#operators"><span class="octicon octicon-link"></span></a>Operators</h3>
+
+<p><em>The most recent and second-most recent stack entries will be denoted</em> x <em>and</em> y <em>respectively. You can always peek inside operators.py for a more objective explanation of these functions.</em></p>
+
+<h4>
+<a name="program" class="anchor" href="#program"><span class="octicon octicon-link"></span></a>Program</h4>
+
+<ul>
+<li>
+<code>p</code> - prints the stack</li>
+<li>
+<code>Q</code> - quits the program, <strong>no matter what</strong>
+</li>
+</ul><h4>
+<a name="stack" class="anchor" href="#stack"><span class="octicon octicon-link"></span></a>Stack</h4>
+
+<ul>
+<li>
+<code>D</code> - drops <em>x</em> and pushes stack items to compensate</li>
+<li>
+<code>C</code> - clears the stack</li>
+<li>
+<code>#</code> - displays a message with the current stack length (does not push anything to the stack)</li>
+<li>
+<code>x</code> - duplicates <em>x</em> and pushes it (equivalent to <code>Enter</code> with an empty buffer)</li>
+<li>
+<code>w</code> - swaps <em>x</em> and <em>y</em>
+</li>
+</ul><h4>
+<a name="arithmetic" class="anchor" href="#arithmetic"><span class="octicon octicon-link"></span></a>Arithmetic</h4>
+
+<ul>
+<li>
+<code>+</code> <code>-</code> <code>*</code> <code>/</code> - basic arithmetic operations</li>
+<li>
+<code>n</code> - returns (_x_ * -1)</li>
+<li>
+<code>%</code> - returns the remainder of the division of <em>y</em> by <em>x</em>
+</li>
+<li>
+<code>f</code> - floor-rounds <em>x</em> to an integer</li>
+<li>
+<code>ln</code> - returns the natural log of the most recent stack entry (_x_)</li>
+<li>
+<code>^</code> - returns <em>y</em> to the <em>xth</em> power</li>
+<li>
+<code>sqrt</code> - returns the square root of <em>x</em>
+</li>
+<li>
+<code>abs</code> - returns the absolute value of <em>x</em>
+</li>
+<li>
+<code>!</code> - returns the factorial of <em>x</em>
+</li>
+</ul><h4>
+<a name="sequence-operators" class="anchor" href="#sequence-operators"><span class="octicon octicon-link"></span></a>Sequence Operators</h4>
+
+<ul>
+<li>
+<code>S</code> - returns the sum of all stack entries</li>
+<li>
+<code>P</code> - returns the product of all stack entries</li>
+</ul><h4>
+<a name="statistics" class="anchor" href="#statistics"><span class="octicon octicon-link"></span></a>Statistics</h4>
+
+<ul>
+<li>
+<code>mean</code> - returns the arithmetic mean of all stack entries</li>
+<li>
+<code>med</code> - returns the median of all stack entries</li>
+</ul><h4>
+<a name="constants" class="anchor" href="#constants"><span class="octicon octicon-link"></span></a>Constants</h4>
+
+<p><em>in <code>rpcalc</code>, constant operators begin with <code>k</code> to prevent conflicts with other operators</em></p>
+
+<ul>
+<li>
+<code>ke</code> - returns <a href="http://en.wikipedia.org/wiki/E_%28mathematical_constant%29">Euler's number</a>: the base of the natural logarithm and the exponential function</li>
+<li>
+<code>kpi</code> - returns <a href="http://en.wikipedia.org/wiki/Pi">pi</a>: the ratio of a circle's circumference to its diameter</li>
+</ul><h4>
+<a name="logic" class="anchor" href="#logic"><span class="octicon octicon-link"></span></a>Logic</h4>
+
+<ul>
+<li>
+<code>==</code> - returns 1 if <em>x</em> is equal to <em>y</em>, otherwise returns 0</li>
+<li>
+<code>=!</code> - returns 0 if <em>x</em> is equal to <em>y</em>, otherwise returns 1</li>
+<li>
+<code>&lt;</code> - returns 1 if <em>y</em> is less than <em>x</em>, otherwise returns 0</li>
+<li>
+<code>&gt;</code> - returns 1 if <em>y</em> is greater than <em>x</em>, otherwise returns 0</li>
+<li>
+<code>=&lt;</code> - returns 1 if <em>y</em> is less than or equal to <em>x</em>, otherwise returns 0</li>
+<li>
+<code>=&gt;</code> - returns 1 if <em>y</em> is greater than or equal to <em>x</em>, otherwise returns 0</li>
+</ul><h4>
+<a name="trigonometry" class="anchor" href="#trigonometry"><span class="octicon octicon-link"></span></a>Trigonometry</h4>
+
+<ul>
+<li>
+<code>deg</code> - converts <em>x</em> (radians) to degrees</li>
+<li>
+<code>rad</code> - converts <em>x</em> (degrees) to radians</li>
+<li>
+<code>sin</code> - returns the sine of <em>x</em> (radians)</li>
+<li>
+<code>cos</code> - returns the cosine of <em>x</em> (radians)</li>
+<li>
+<code>tan</code> - returns the tangent of <em>x</em> (radians)</li>
+<li>
+<code>asin</code> - returns the arcsine of <em>x</em> (radians)</li>
+<li>
+<code>acos</code> - returns the arccosine of <em>x</em> (radians)</li>
+<li>
+<code>atan</code> - returns the arctangent of <em>x</em> (radians)</li>
+</ul><h4>
+<a name="other" class="anchor" href="#other"><span class="octicon octicon-link"></span></a>Other</h4>
+
+<ul>
+<li>
+<code>rand</code> - returns a random number between 0 and 1</li>
+</ul><p>Other operations can easily be added by modifying <code>operators.py</code>.</p>
+
+<h3>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h3>
+
+<p><em>Results are designated with <code>&gt;&gt;&gt;</code>, but these are really stored in the stack and displayed only because they are the current</em> x <em>value.</em></p>
+
+<pre><code>1 Enter 2 +
+&gt;&gt;&gt; 3.0
+
+2 Enter Enter Enter * *
+&gt;&gt;&gt; 8.0
+
+10 ln
+&gt;&gt;&gt; 2.302585092994046
+
+256 ln 2 ln /
+&gt;&gt;&gt; 8.0
+
+2 Enter 256 ln s ln /
+&gt;&gt;&gt; 8.0
+
+2 Enter 3 ==
+&gt;&gt;&gt; 0
+
+2 Enter Enter ==
+&gt;&gt;&gt; 1
+</code></pre>
+
+<h3>
+<a name="known-issues" class="anchor" href="#known-issues"><span class="octicon octicon-link"></span></a>Known Issues</h3>
+
+<ul>
+<li>In-program help (<code>?</code>) is not yet supported.</li>
+</ul><h2>
+<a name="faq" class="anchor" href="#faq"><span class="octicon octicon-link"></span></a>FAQ</h2>
+
+<blockquote>
+<p><strong>I found a bug! Let me email that to you...</strong></p>
+</blockquote>
+
+<p>Thank you, but please don't email me the bug! Make sure it's not a <a href="#known-issues">known issue</a>, and write me a bug report <a href="https://github.com/qguv/rpcalc/issues/new">here</a> or if you're familiar with git: fork, fix, and file a pull request.</p>
+
+<blockquote>
+<p><strong>How do I do log base <em>x</em>?</strong></p>
+</blockquote>
+
+<p>A <code>log</code> function is not scheduled to be implemented because the functionality is <em>already there</em> and because there is no reason to memorize which stack item will be the base and on which item the log will operate.</p>
+
+<p>You will need to use the <em>change of base formula</em>:</p>
+
+<p><img src="resources/logCOB.png" alt="Logarithmic Change of Base Formula"></p>
+
+<pre><code>256 ln 2 ln /
+</code></pre>
+
+<blockquote>
+<p><strong>There's <code>mean</code> and <code>med</code>, so why are there no <em>mode</em>, <em>maximum</em>, or <em>minimum</em> operators?</strong></p>
+</blockquote>
+
+<p>Arithmetic mean and median return one result, which is pushed into the stack. Mode, maximum, and minimum all have the capacity to produce more than one result. There is no non-arbitrary method of deciding the order in which the multiple answers would be pushed into the stack. Answers like these would be no good if the user didn't know which answer s/he wanted or where it went in the stack. Procedurally, these functions would be easy to write, but there is no clear way to display the answer to the user.</p>
+
+<h2>
+<a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h2>
+
+<p>At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, my workflow, Python 3, and Object-Oriented Programming in general.</p>
+
+<p>-<a href="http://github.com/qguv/">Quintus</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">rpcalc maintained by <a href="https://github.com/qguv">qguv</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
