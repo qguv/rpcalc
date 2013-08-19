@@ -113,7 +113,7 @@ _Results are designated with `>>>`, but these are really stored in the stack and
     256 ln 2 ln /
     >>> 8.0
     
-    2 Enter 256 ln s ln /
+    2 Enter 256 ln w ln /
     >>> 8.0
     
     2 Enter 3 ==
