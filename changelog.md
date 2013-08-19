@@ -4,6 +4,14 @@ Changelog
 ## _NEXT VERSION_
 _lots of testing was done to prepare for this release!_
 
+## Version 0.3.1
+
+### Additions:
+- documentation improvements
+
+### Modifications:
+- changed `x` to be a shortcut for `*`
+
 ## Version 0.3
 
 ### Additions:

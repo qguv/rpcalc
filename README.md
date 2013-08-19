@@ -4,27 +4,35 @@ A reverse polish notation calculator written in Python 3.
 
 
 ## About
-`rpcalc` is destined to be a reverse polish notation calculator based on the HP 11C Scientific Calculator with extended features, such as:
+`rpcalc` is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/Reverse_Polish_notation) calculator based on the [HP 11C Scientific Calculator](http://www.hpmuseum.org/hp11c.htm) with extended features, such as:
 
-- Unlimited stack length
-- User-extendible operators
-- An advanced stack datatype
+- An advanced stack datatype with unlimited stack length
+- User-extendible operators with simple, familiar syntax
+- Floating-point precision limited only by Python
 
-
-## Operation
-`rpcalc` uses a stack for all operations. This document assumes the user is familiar with stack-based calculators; in the future, more thorough documentation may be written for the lay user.
-
-### Installation & Execution
-You will need Python 3.3 to run `rpcalc`. As there are currently no `rpcalc` binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/). Switch to the `rpcalc/` directory, and run the following from a command shell:
+## Installation & Execution
+You will need Python 3.3 to run `rpcalc`. As there are currently no `rpcalc` binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/). Switch to the `rpcalc` directory, and run the following from a command shell:
 
     python3 rpn.py
 
-It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable. Google is your friend here.
+It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable.
+
+## Operation
+`rpcalc` uses a stack for all operations. Users unfamiliar with RPN or stack-based calculation are encouraged to read [**Basic Example**](#basic-example) below and a [general RPN tutorial](http://glow.sourceforge.net/tutorial/lesson7/side_rpn.html) (short and sweet).
+
+### Basic Example
+To multiply seven by the sum of two and one million:
+
+- Type `2` `Enter`. This puts two into the stack.
+- Type `1e6` `+`. This adds what you just typed with the most recent stack entry.
+- Type `7` `x`. This multiplies seven with the result of the last calculation.
+
+Your result, `7000014.0`, is now the only entry in the stack. You can confirm this by pressing `p` or `#`.
 
 ### Concepts
-- Numbers are pushed into the stack once `Enter` is pressed or an operation is entered
-- Operations are executed as soon as they are typed; **do not** follow operations with `Enter`
-- There is no artificial limit placed on stack length. Push 'till the cows come home.
+- Numbers are pushed into the stack once `Enter` is pressed or an operation is entered.
+- Operations are executed as soon as they are typed; **do not** follow operations with `Enter`.
+- There is no artificial limit placed on stack length.
 - If in doubt, use the program as you would an 11C, if you are familiar with its operation.
 
 ### Operators
@@ -38,11 +46,12 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `D` - drops _x_ and pushes stack items to compensate
 - `C` - clears the stack
 - `#` - displays a message with the current stack length (does not push anything to the stack)
-- `x` - duplicates _x_ and pushes it (equivalent to `Enter` with an empty buffer)
 - `w` - swaps _x_ and _y_
+- `Enter` (while no number is being entered) - duplicates _x_ and pushes it
 
 #### Arithmetic
 - `+` `-` `*` `/` - basic arithmetic operations
+- `x` - shortcut for `*`
 - `n` - returns (_x_ * -1)
 - `%` - returns the remainder of the division of _y_ by _x_
 - `f` - floor-rounds _x_ to an integer
@@ -127,7 +136,7 @@ A `log` function is not scheduled to be implemented because the functionality is
 
 You will need to use the _change of base formula_:
 
-![Logarithmic Change of Base Formula](resources/logCOB.png)
+![Logarithmic Change of Base Formula](https://raw.github.com/qguv/rpcalc/master/resources/logCOB.png)
 
     256 ln 2 ln /
 
