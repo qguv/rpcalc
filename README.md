@@ -18,7 +18,7 @@ You will need Python 3.3 to run `rpcalc`. As there are currently no `rpcalc` bin
 It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable.
 
 ## Operation
-`rpcalc` uses a stack for all operations. This document assumes the user is familiar with stack-based calculators; in the future, more thorough documentation may be written for the lay user.
+`rpcalc` uses a stack for all operations. Users unfamiliar with RPN or stack-based calculation are encouraged to read [**Basic Example**](#basic-example) below and a [general RPN tutorial](http://glow.sourceforge.net/tutorial/lesson7/side_rpn.html) (short and sweet).
 
 ### Basic Example
 To multiply seven by the sum of two and one million:
