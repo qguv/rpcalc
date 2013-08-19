@@ -3,7 +3,7 @@ Changelog
 
 ## Version 0.3.1
 
-### Fixes:
+### Additions:
 - documentation improvements
 
 ### Modifications:
