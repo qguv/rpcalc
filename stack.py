@@ -64,7 +64,7 @@ class Stack:
     def pop(self):
         #TODO define "is empty" (re: Alan)
         if len(self) == 0:
-            print("empty stack!")
+            print("empty stack!") #does this do anything?
         else:
             return self.items.pop()
 
