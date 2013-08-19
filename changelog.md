@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## Version 0.3.1
+
+### Fixes:
+- documentation improvements
+
+### Modifications:
+- changed `x` to be a shortcut for `*`
+
 ## Version 0.3
 
 ### Additions:

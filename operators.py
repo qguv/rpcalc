@@ -26,7 +26,9 @@ def Clear(stack):
 def Length(stack):
     return stack.name + " has " + str(len(stack)) + " entries."
 
-def DupX(stack):
+def DupX(stack): # currently not used;
+                 # functionality given by
+                 # `Enter` with empty buf
     a = stack.pop()
     stack.push(a)
     stack.push(a)
@@ -303,12 +305,12 @@ bindings = {
         'D' :   [Drop      , 1],
         'C' :   [Clear     , 1],
         '#' :   [Length    , 0],
-        'x' :   [DupX      , 1],
         'w' :   [SwapXY    , 2],
         #### Arithmetic
         '+' :   [Add       , 2],
         '-' :   [Subtract  , 2],
         '*' :   [Multiply  , 2],
+        'x' :   [Multiply  , 2],
         '/' :   [Divide    , 2],
         'n' :   [Negate    , 1],
         '%' :   [Modulus   , 2],
