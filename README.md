@@ -4,21 +4,21 @@ A reverse polish notation calculator written in Python 3.
 
 
 ## About
-`rpcalc` is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/Reverse_Polish_notation) calculator based on the [HP 11C Scientific Calculator](http://www.hpmuseum.org/hp11c.htm) with extended features, such as:
+rpcalc is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/Reverse_Polish_notation) calculator based on the [HP 11C Scientific Calculator](http://www.hpmuseum.org/hp11c.htm) with extended features, such as:
 
 - An advanced stack datatype with unlimited stack length
 - User-extendible operators with simple, familiar syntax
 - Floating-point precision limited only by Python
 
 ## Installation & Execution
-You will need Python 3.3 to run `rpcalc`. As there are currently no `rpcalc` binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/). Switch to the `rpcalc` directory, and run the following from a command shell:
+You will need Python 3.3 to run rpcalc. As there are currently no rpcalc binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/). Switch to the rpcalc directory, and run the following from a command shell:
 
     python3 rpn.py
 
 It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable.
 
 ## Operation
-`rpcalc` uses a stack for all operations. Users unfamiliar with RPN or stack-based calculation are encouraged to read [**Basic Example**](#basic-example) below and a [general RPN tutorial](http://glow.sourceforge.net/tutorial/lesson7/side_rpn.html) (short and sweet).
+rpcalc uses a stack for all operations. Users unfamiliar with RPN or stack-based calculation are encouraged to read [**Basic Example**](#basic-example) below and a [general RPN tutorial](http://glow.sourceforge.net/tutorial/lesson7/side_rpn.html) (short and sweet).
 
 ### Basic Example
 To multiply seven by the sum of two and one million:
@@ -70,7 +70,7 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 - `med` - returns the median of all stack entries
 
 #### Constants
-_in `rpcalc`, constant operators begin with `k` to prevent conflicts with other operators_
+_in rpcalc, constant operators begin with `k` to prevent conflicts with other operators_
 
 - `ke` - returns [Euler's number](http://en.wikipedia.org/wiki/E_%28mathematical_constant%29): the base of the natural logarithm and the exponential function
 - `kpi` - returns [pi](http://en.wikipedia.org/wiki/Pi): the ratio of a circle's circumference to its diameter
