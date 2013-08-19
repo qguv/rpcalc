@@ -39,35 +39,45 @@
 <h2>
 <a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
 
-<p><code>rpcalc</code> is destined to be a reverse polish notation calculator based on the HP 11C Scientific Calculator with extended features, such as:</p>
+<p><code>rpcalc</code> is a stack-based <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">reverse polish notation</a> calculator based on the <a href="http://www.hpmuseum.org/hp11c.htm">HP 11C Scientific Calculator</a> with extended features, such as:</p>
 
 <ul>
-<li>Unlimited stack length</li>
-<li>User-extendible operators</li>
-<li>An advanced stack datatype</li>
+<li>An advanced stack datatype with unlimited stack length</li>
+<li>User-extendible operators with simple, familiar syntax</li>
+<li>Floating-point precision limited only by Python</li>
 </ul><h2>
-<a name="operation" class="anchor" href="#operation"><span class="octicon octicon-link"></span></a>Operation</h2>
+<a name="installation--execution" class="anchor" href="#installation--execution"><span class="octicon octicon-link"></span></a>Installation &amp; Execution</h2>
 
-<p><code>rpcalc</code> uses a stack for all operations. This document assumes the user is familiar with stack-based calculators; in the future, more thorough documentation may be written for the lay user.</p>
-
-<h3>
-<a name="installation--execution" class="anchor" href="#installation--execution"><span class="octicon octicon-link"></span></a>Installation &amp; Execution</h3>
-
-<p>You will need Python 3.3 to run <code>rpcalc</code>. As there are currently no <code>rpcalc</code> binaries, simply download the necessary files from the <a href="http://github.com/qguv/rpcalc/">git repository</a>. Switch to the <code>rpcalc/</code> directory, and run the following from a command shell:</p>
+<p>You will need Python 3.3 to run <code>rpcalc</code>. As there are currently no <code>rpcalc</code> binaries, simply download the necessary files from the <a href="http://github.com/qguv/rpcalc/">git repository</a>. Switch to the <code>rpcalc</code> directory, and run the following from a command shell:</p>
 
 <pre><code>python3 rpn.py
 </code></pre>
 
-<p>It is possible that your system calls your Python 3.3 binary something different, such as <code>python</code> (ArchLinux) or <code>py33.exe</code> (some Windows). If this is the case, replace <code>python3</code> in the above example with the proper executable. Google is your friend here.</p>
+<p>It is possible that your system calls your Python 3.3 binary something different, such as <code>python</code> (ArchLinux) or <code>py33.exe</code> (some Windows). If this is the case, replace <code>python3</code> in the above example with the proper executable.</p>
+
+<h2>
+<a name="operation" class="anchor" href="#operation"><span class="octicon octicon-link"></span></a>Operation</h2>
+
+<p><code>rpcalc</code> uses a stack for all operations. Users unfamiliar with RPN or stack-based calculation are encouraged to read <a href="#basic-example"><strong>Basic Example</strong></a> below and a <a href="http://glow.sourceforge.net/tutorial/lesson7/side_rpn.html">general RPN tutorial</a> (short and sweet).</p>
+
+<h3>
+<a name="basic-example" class="anchor" href="#basic-example"><span class="octicon octicon-link"></span></a>Basic Example</h3>
+
+<p>To multiply seven by the sum of two and one million:</p>
+
+<ul>
+<li>Type <code>2</code> <code>Enter</code>. This puts two into the stack.</li>
+<li>Type <code>1e6</code> <code>+</code>. This adds what you just typed with the most recent stack entry.</li>
+<li>Type <code>7</code> <code>x</code>. This multiplies seven with the result of the last calculation.</li>
+</ul><p>Your result, <code>7000014.0</code>, is now the only entry in the stack. You can confirm this by pressing <code>p</code> or <code>#</code>.</p>
 
 <h3>
 <a name="concepts" class="anchor" href="#concepts"><span class="octicon octicon-link"></span></a>Concepts</h3>
 
 <ul>
-<li>Numbers are pushed into the stack once <code>Enter</code> is pressed or an operation is entered</li>
-<li>Operations are executed as soon as they are typed; <strong>do not</strong> follow operations with <code>Enter</code>
-</li>
-<li>There is no artificial limit placed on stack length. Push 'till the cows come home.</li>
+<li>Numbers are pushed into the stack once <code>Enter</code> is pressed or an operation is entered.</li>
+<li>Operations are executed as soon as they are typed; <strong>do not</strong> follow operations with <code>Enter</code>.</li>
+<li>There is no artificial limit placed on stack length.</li>
 <li>If in doubt, use the program as you would an 11C, if you are familiar with its operation.</li>
 </ul><h3>
 <a name="operators" class="anchor" href="#operators"><span class="octicon octicon-link"></span></a>Operators</h3>
@@ -94,16 +104,19 @@
 <li>
 <code>#</code> - displays a message with the current stack length (does not push anything to the stack)</li>
 <li>
-<code>x</code> - duplicates <em>x</em> and pushes it (equivalent to <code>Enter</code> with an empty buffer)</li>
-<li>
 <code>w</code> - swaps <em>x</em> and <em>y</em>
 </li>
+<li>
+<code>Enter</code> (while no number is being entered) - duplicates <em>x</em> and pushes it</li>
 </ul><h4>
 <a name="arithmetic" class="anchor" href="#arithmetic"><span class="octicon octicon-link"></span></a>Arithmetic</h4>
 
 <ul>
 <li>
 <code>+</code> <code>-</code> <code>*</code> <code>/</code> - basic arithmetic operations</li>
+<li>
+<code>x</code> - shortcut for <code>*</code>
+</li>
 <li>
 <code>n</code> - returns (_x_ * -1)</li>
 <li>
@@ -243,7 +256,7 @@
 
 <p>You will need to use the <em>change of base formula</em>:</p>
 
-<p><img src="resources/logCOB.png" alt="Logarithmic Change of Base Formula"></p>
+<p><img src="https://raw.github.com/qguv/rpcalc/master/resources/logCOB.png" alt="Logarithmic Change of Base Formula"></p>
 
 <pre><code>256 ln 2 ln /
 </code></pre>
