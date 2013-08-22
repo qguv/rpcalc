@@ -1,8 +1,11 @@
 Changelog
 =========
 
-## _NEXT VERSION_
-_lots of testing was done to prepare for this release!_
+## Version 0.3.2
+
+### Fixes:
+- fixed some oddities in documentation after public feedback
+- added a comprehensive developer commit checklist `develop.md`
 
 ## Version 0.3.1
 
