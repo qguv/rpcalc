@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## Version 0.3.3
+
+### Fixes:
+- fixed duplication bug
+
 ## Version 0.3.2
 
 ### Fixes:

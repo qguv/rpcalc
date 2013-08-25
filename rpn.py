@@ -72,7 +72,7 @@ def readCalc(stack): # third re-write!
         if buf[-1] == '\r': # return
             if len(buf) == 1: # if there aren't any numbers to enter
                 if len(stack) != 0: # if there is an x
-                    operate("x", stack) # dup X
+                    ops.DupX(stack) # duplicate x
                 else:
                     stack.push(float(0))
             else: # put number in stack
