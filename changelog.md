@@ -3,6 +3,10 @@ Changelog
 
 ## _NEXT RELESASE_
 
+### Fixes:
+- significant technical improvements--lots of re-writing
+- better English grammar with `#` operator
+
 ## Version 0.3.3
 
 ### Fixes:
