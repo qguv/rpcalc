@@ -52,10 +52,10 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 #### Arithmetic
 - `+` `-` `*` `/` - basic arithmetic operations
 - `x` - shortcut for `*`
-- `n` - returns (_x_ * -1)
+- `n` - returns ( _x_ * -1 )
 - `%` - returns the remainder of the division of _y_ by _x_
 - `f` - floor-rounds _x_ to an integer
-- `ln` - returns the natural log of the most recent stack entry (_x_)
+- `ln` - returns the natural log of the most recent stack entry ( _x_ )
 - `^` - returns _y_ to the _xth_ power
 - `sqrt` - returns the square root of _x_
 - `abs` - returns the absolute value of _x_
