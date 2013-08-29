@@ -3,6 +3,9 @@ Changelog
 
 ## _NEXT RELESASE_
 
+### Additions:
+- interactive help can be accessed with `?`
+
 ### Fixes:
 - significant technical improvements--lots of re-writing
 - better English grammar with `#` operator

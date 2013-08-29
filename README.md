@@ -123,7 +123,7 @@ _Results are designated with `>>>`, but these are really stored in the stack and
     >>> 1
 
 ### Known Issues
-- In-program help (`?`) is not yet supported.
+_currently none._
 
 ## FAQ
 > **I found a bug! Let me email that to you...**

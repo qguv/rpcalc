@@ -130,10 +130,9 @@ def keyHandler(stack, buf, errors):
             return (buf,'',False)
 
 # the big guns
-def readCalc(stack): # third re-write!
-    global errors
-    buf = ''
-    printFlag = False
+def readCalc(stack): # fourth re-write!
+    global errors #TODO there has to be a better way
+    buf,printFlag = '',False
     while True:
         if printFlag:
             # replaces normal print with a view of the stack
