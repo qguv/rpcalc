@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## _NEXT RELESASE_
+## Version 0.4
 
 ### Additions:
 - interactive help can be accessed with `?`
