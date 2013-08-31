@@ -1,6 +1,8 @@
 Changelog
 =========
 
+## __NEXT RELEASE__
+
 ## Version 0.4
 
 ### Additions:
