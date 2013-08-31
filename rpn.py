@@ -109,13 +109,12 @@ def keyHandler(stack, buf, errors):
                 try:
                     stack.push(float(buf[:-1]))
                 except (TypeError, ValueError):
-                    return (buf,"not a number!",False)
+                    return ('',"not a number!",False)
                 else:
                     return ('','',False)
         elif ( buf[-1] == '\x08' ) or \
              ( buf[-1] == '\x7f' ) or \
              ( buf[-1] == '\b'   ): # handling backspace
-            buf = buf[:-2] 
             return (buf[:-2],'',False)
         elif buf == 'p': # Special "print" operator
             return ('','',True)
