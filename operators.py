@@ -18,22 +18,42 @@ from random import random
 #### Stack ####
 
 def Drop(stack):
+    '''
+    Discards the most recent stack entry.
+    '''
     null = stack.pop()
 
 def Clear(stack):
+    '''
+    Discards all stack items, emptying the stack.
+    '''
     stack.items = list()
 
 def Length(stack):
-    return stack.name + " has " + str(len(stack)) + " entries."
+    '''
+    Displays the entries in the stack.
+    '''
+    stackLength = len(stack)
+    if stackLength == 1:
+        return stack.name + " has 1 entry."
+    elif stackLength == 0:
+        return stack.name + " is empty."
+    else:
+        return stack.name + " has " + str(stackLength) + " entries."
 
-def DupX(stack): # currently not used;
-                 # functionality given by
-                 # `Enter` with empty buf
+def DupX(stack):
+    '''
+    Pushes a copy of the newest entry to the stack.
+    '''
     a = stack.pop()
     stack.push(a)
     stack.push(a)
 
 def SwapXY(stack):
+    '''
+    Swaps the values of the most recently entered stack item
+    and the second-most recently entered stack item.
+    '''
     x = stack.pop()
     y = stack.pop()
     stack.push(x)
@@ -43,21 +63,35 @@ def SwapXY(stack):
 #### Arithmetic ####
 
 def Add(stack):
+    '''
+    Combines the most recent two stack entries by summing.
+    '''
     b = stack.pop()
     a = stack.pop()
     stack.push(a + b)
 
 def Subtract(stack):
+    '''
+    Combines the most recent two stack entries by subtracting
+    the more recent from the older.
+    '''
     b = stack.pop()
     a = stack.pop()
     stack.push(a - b)
 
 def Multiply(stack):
+    '''
+    Combines the most recent two stack entries by multiplying.
+    '''
     b = stack.pop()
     a = stack.pop()
     stack.push(a * b)
 
 def Divide(stack):
+    '''
+    Combines the most recent two stack entries by dividing
+    the older by the more recent.
+    '''
     b = stack.pop()
     a = stack.pop()
     if b == 0:
@@ -69,19 +103,33 @@ def Divide(stack):
         stack.push(r)
 
 def Negate(stack):
+    '''
+    Multiplies the most recent entry by -1.
+    '''
     a = stack.pop()
     stack.push(-1 * a)
 
 def Modulus(stack):
+    '''
+    Replaces the most recent two stack items with the remainder
+    given by dividing the older entry by the more recent.
+    '''
     b = stack.pop()
     a = stack.pop()
     stack.push(a % b)
 
 def Floor(stack):
+    '''
+    Rounds the most recent stack entry down to an integer.
+    '''
     a = stack.pop()
     stack.push(math.floor(a))
 
 def Ln(stack):
+    '''
+    Finds the natural logarithm of the most recent stack
+    entry and replaces the entry with the result.
+    '''
     a = stack.pop()
     if a <= 0: 
         return "out of domain!"
@@ -90,11 +138,19 @@ def Ln(stack):
         stack.push(r) # push the answer
 
 def Power(stack):
+    '''
+    Replaces the most recent two stack items with the value
+    of the older to the newer's power.
+    '''
     b = stack.pop()
     a = stack.pop()
     stack.push(a ** b)
 
 def SqRoot(stack):
+    '''
+    Finds the square root of the most recent stack entry
+    and replaces the entry with the result.
+    '''
     a = stack.pop()
     if (a < 0):
         return "imaginary numbers not supported!"
@@ -103,11 +159,19 @@ def SqRoot(stack):
         stack.push(r)
 
 def Absolute(stack):
+    '''
+    If the most recent stack entry is negative, it is
+    replaced with the entry multiplied by -1.
+    '''
     a = stack.pop()
     r = abs(a)
     stack.push(r)
 
 def Factorial(stack):
+    '''
+    Finds the factorial of the most recent stack entry
+    and replaces the entry with the result.
+    '''
     a = stack.pop()
     if (a < 0):
         return "out of domain!"
@@ -127,10 +191,18 @@ def MakeList(stack):
     return r
 
 def Summation(stack):
+    '''
+    Sums all stack entries, clears the stack, and
+    pushes the result.
+    '''
     r = math.fsum(MakeList(stack))
     stack.push(r)
 
 def Product(stack):
+    '''
+    Sums all stack entries, clears the stack, and
+    pushes the result.
+    '''
     seq = MakeList(stack)
     r = 1
     for element in seq:
@@ -141,11 +213,19 @@ def Product(stack):
 #### Statistics ####
 
 def Mean(stack):
+    '''
+    Finds the arithmetic mean of all stack entries,
+    clears the stack, and pushes the result.
+    '''
     seq = MakeList(stack)
     r = sum(seq) / len(seq)
     stack.push(r)
 
 def Median(stack):
+    '''
+    Finds the median of all stack entries, clears
+    the stack, and pushes the result.
+    '''
     ord = sorted(MakeList(stack))
     if len(ord) % 2 == 1:
     # if only one middle number, return that
@@ -162,10 +242,16 @@ def Median(stack):
 #### Constants ####
 
 def ConstPi(stack):
+    '''
+    Pushes "Pi" to the stack.
+    '''
     r = math.pi
     stack.push(r)
 
 def ConstE(stack):
+    '''
+    Pushes "Euler's Number" to the stack.
+    '''
     r = math.e
     stack.push(r)
 
@@ -173,36 +259,60 @@ def ConstE(stack):
 #### Logic ####
 
 def EqTest(stack):
+    '''
+    Returns 1 if the most recent two stack
+    entries are identical. Otherwise returns 0.
+    '''
     b = stack.pop()
     a = stack.pop()
     r = 1 if a == b else 0
     stack.push(r)
 
 def NotTest(stack):
+    '''
+    Returns 0 if the most recent two stack
+    entries are identical. Otherwise returns 1.
+    '''
     b = stack.pop()
     a = stack.pop()
     r = 1 if a != b else 0
     stack.push(r)
 
 def LtTest(stack):
+    '''
+    Returns 1 if the second-newest stack entry is
+    less than the newest. Otherwise returns 0.
+    '''
     b = stack.pop()
     a = stack.pop()
     r = 1 if a < b else 0
     stack.push(r)
 
 def GtTest(stack):
+    '''
+    Returns 1 if the second-newest stack entry is
+    greater than the newest. Otherwise returns 0.
+    '''
     b = stack.pop()
     a = stack.pop()
     r = 1 if a > b else 0
     stack.push(r)
 
 def LtEqTest(stack):
+    '''
+    Returns 1 if the second-newest stack entry is
+    no greater than the newest. Otherwise returns 0.
+    '''
     b = stack.pop()
     a = stack.pop()
     r = 1 if a <= b else 0
     stack.push(r)
 
 def GtEqTest(stack):
+    '''
+    Returns 1 if the second-newest stack entry is
+    no less than the newest. Otherwise returns 0.
+    '''
     b = stack.pop()
     a = stack.pop()
     r = 1 if a >= b else 0
@@ -227,24 +337,40 @@ def TrigRoundFix(roughAnswer):
     return r
 
 def Sine(stack):
+    '''
+    Returns the trigonometric "sin()" of the most recent
+    stack entry, in radians.
+    '''
     a = stack.pop()
     r = math.sin(a)
     r = TrigRoundFix(r)
     stack.push(r)
 
 def Cosine(stack):
+    '''
+    Returns the trigonometric "cos()" of the most recent
+    stack entry, in radians.
+    '''
     a = stack.pop()
     r = math.cos(a)
     r = TrigRoundFix(r)
     stack.push(r)
 
 def Tangent(stack):
+    '''
+    Returns the trigonometric "tan()" of the most recent
+    stack entry, in radians.
+    '''
     a = stack.pop()
     r = math.tan(a)
     r = TrigRoundFix(r)
     stack.push(r)
 
 def Arcsine(stack):
+    '''
+    Returns the trigonometric "arcsin()" of the most recent
+    stack entry, in radians.
+    '''
     a = stack.pop()
     if (a > 1) or (a < -1):
         return "out of domain!"
@@ -254,6 +380,10 @@ def Arcsine(stack):
         stack.push(r)
 
 def Arccosine(stack):
+    '''
+    Returns the trigonometric "arccos()" of the most recent
+    stack entry, in radians.
+    '''
     a = stack.pop()
     if (a > 1) or (a < -1):
         return "out of domain!"
@@ -263,17 +393,27 @@ def Arccosine(stack):
         stack.push(r)
 
 def Arctangent(stack):
+    '''
+    Returns the trigonometric "arctan()" of the most recent
+    stack entry, in radians.
+    '''
     a = stack.pop()
     r = math.atan(a)
     r = TrigRoundFix(r)
     stack.push(r)
 
 def ToDegrees(stack):
+    '''
+    Converts a stack entry from radians to degrees.
+    '''
     a = stack.pop()
     r = math.degrees(a)
     stack.push(r)
 
 def ToRadians(stack):
+    '''
+    Converts a stack entry from degrees to radians.
+    '''
     a = stack.pop()
     r = math.radians(a)
     stack.push(r)
@@ -282,14 +422,29 @@ def ToRadians(stack):
 #### Others ####
 
 def Random(stack):
+    '''
+    Returns a pseudo-random number from 0 to 1.
+    '''
     stack.push(random())
 
 def DebugIter(stack):
+    '''
+    A debug function. May break rpcalc.
+    '''
     a = stack.pop()
     a_ = int(math.floor(a)) # a-prime
     for i in range(1, (a_ + 1)):
         stack.push(i)
     return "pushed " + str(a_) + " entries."
+
+def Help(stack):
+    '''
+    Displays interactive help for on-board and
+    extended functions.
+    '''
+    import help
+    help.main()
+    return "returning to " + stack.name + '.'
 
 # Bindings cannot include any of the following
 # characters for technical reasons: Q p
@@ -348,4 +503,5 @@ bindings = {
         #### Others
         'rand': [Random    , 0],
         'debug':[DebugIter , 1], #DEBUG
+        '?' :   [Help      , 0],
         }
