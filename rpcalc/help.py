@@ -2,8 +2,8 @@
 # rpcalc interactive help file
 # for more info, see github.com/qguv/rpcalc
 
-from inout import getch, clear
-import operators as ops
+from rpcalc.inout import getch, clear
+import rpcalc.operators as ops
 
 intro = '''interactive rpcalc help:
 

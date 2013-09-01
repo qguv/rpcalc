@@ -4,12 +4,13 @@
 
 from distutils.core import setup
 
-setup(  name = "rpcalc",
-        version = "0.4",
-        description = "A reverse polish notation calculator written in Python 3.",
-        author = "Quint Guvernator",
-        author_email = "quintus.public@gmail.com",
-        url = "https://github.com/qguv/rpcalc",
-        package_dir = {"rpcalc":"src"},
-        packages = ["rpcalc"]
-     )
+if __name__ == '__main__':
+    setup(  name = "rpcalc",
+            version = "0.4",
+            description = "A reverse polish notation calculator written in Python 3.",
+            author = "Quint Guvernator",
+            author_email = "quintus.public@gmail.com",
+            url = "https://github.com/qguv/rpcalc",
+            scripts = ["scripts/rpcalc"],
+            packages = ["rpcalc"],
+    )

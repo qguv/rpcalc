@@ -3,13 +3,13 @@
 # for more info, see github.com/qguv/rpcalc
 
 import math
-from stack import Stack
-from inout import clear
+from rpcalc.stack import Stack
+from rpcalc.inout import clear
 
 errors = ''
 
 # Getch operations
-from inout import getch as rawGetch
+from rpcalc.inout import getch as rawGetch
 def getch():
     rawChar = rawGetch()
     if rawChar == 'Q': # naive escape
@@ -21,7 +21,7 @@ def getch():
     return inpChar
 
 # operator management functions
-import operators as ops
+import rpcalc.operators as ops
 
 def getArgReq(symbol):
     return ops.bindings[symbol][1]
@@ -145,5 +145,7 @@ def readCalc(stack): # fourth re-write!
 
 
 # DO IT #
-mainStack = Stack([], 'mainstack')
-readCalc(mainStack)
+def main():
+    mainStack = Stack([], 'mainstack')
+    readCalc(mainStack)
+

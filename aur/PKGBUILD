@@ -1,0 +1,21 @@
+# Maintainer: Quint Guvernator <quintus.public@gmail.com>
+pkgname=rpcalc
+pkgver=0.4
+pkgrel=1
+pkgdesc="A reverse polish notation calculator written in Python 3."
+arch=('i686' 'x86_64')
+url="http://github.com/qguv/rpcalc"
+license=('GPL3')
+depends=('python>=3')
+install=
+changelog=
+source=(https://github.com/qguv/rpcalc/archive/master.zip)
+noextract=()
+md5sums=('SKIP') #generate with 'makepkg -g'
+
+package() {
+  cd "$srcdir/$pkgname"
+  python setup.py install --optimize=1
+}
+
+# vim:set ts=2 sw=2 et:
