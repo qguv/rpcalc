@@ -458,7 +458,7 @@ bindings = {
     # Value[1] is the argument requirement
         #### Stack
         'D' :   [Drop      , 1],
-        'C' :   [Clear     , 1],
+        'C' :   [Clear     , 0],
         '#' :   [Length    , 0],
         'w' :   [SwapXY    , 2],
         #### Arithmetic
