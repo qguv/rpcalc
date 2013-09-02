@@ -3,6 +3,9 @@ Changelog
 
 ## __NEXT RELEASE__
 
+### Fixes:
+- clear will no longer complain about an empty stack
+
 ## Version 0.4
 
 ### Additions:
