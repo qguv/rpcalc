@@ -3,6 +3,12 @@ Changelog
 
 ## __NEXT RELEASE__
 
+### Modification:
+- project restructured to be easier to install and compatable with the arch distribution system
+
+### Additions:
+- more descriptive/useful error messages
+
 ### Fixes:
 - clear will no longer complain about an empty stack
 

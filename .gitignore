@@ -6,3 +6,5 @@ todo.txt
 dist
 dist/*
 MANIFEST
+build
+build/*

@@ -442,9 +442,12 @@ def Help(stack):
     Displays interactive help for on-board and
     extended functions.
     '''
-    import help
-    help.main()
+    import rpcalc.help
+    rpcalc.help.main()
     return "returning to " + stack.name + '.'
+
+def ExitHelp(stack):
+    return "use Shift+Q (capital Q) to quit. type ? for help."
 
 # Bindings cannot include any of the following
 # characters for technical reasons: Q p
@@ -503,5 +506,6 @@ bindings = {
         #### Others
         'rand': [Random    , 0],
         'debug':[DebugIter , 1], #DEBUG
-        '?' :   [Help      , 0],
+        '?':    [Help      , 0],
+        ''  : [ExitHelp  , 0],
         }

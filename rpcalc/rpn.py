@@ -80,7 +80,7 @@ def operHandler(stack, buf):
             if len(buf) != 0: # if there are any numbers to enter
                 stack.push(float(buf))
             operBuf = ''
-            return ('','not an operator!',False)
+            return ('','not an operator! type ? for help.',False)
     else:
         if len(buf) != 0: # if there are any numbers to enter
             stack.push(float(buf))
@@ -122,9 +122,9 @@ def keyHandler(stack, buf, errors):
         # character just inserted is at least a partial operator
             return operHandler(stack, buf)
         elif (buf[-1] == 'e') and (not isNum(buf[:-1])):
-            return ('','not an operator!',False)
+            return ('','not an operator! type ? for help.',False)
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
-            return ('','not an operator!',False)
+            return ('','not an operator! type ? for help.',False)
         else:
             return (buf,'',False)
 
