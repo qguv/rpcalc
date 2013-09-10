@@ -56,9 +56,28 @@
 </ul><h2>
 <a name="installation--execution" class="anchor" href="#installation--execution"><span class="octicon octicon-link"></span></a>Installation &amp; Execution</h2>
 
-<p>You will need Python 3.3 to run rpcalc. As there are currently no rpcalc binaries, simply download the necessary files from the <a href="http://github.com/qguv/rpcalc/">git repository</a>. Switch to the rpcalc directory, and run the following from a command shell:</p>
+<p>You will need Python 3.3 or higher to run rpcalc. As there are currently no rpcalc binaries, simply download the necessary files from the <a href="http://github.com/qguv/rpcalc/">git repository</a>.</p>
 
-<pre><code>python3 rpn.py
+<h3>
+<a name="installing-to-system" class="anchor" href="#installing-to-system"><span class="octicon octicon-link"></span></a>Installing to System</h3>
+
+<p>Switch to the rpcalc directory, and run the following from a command shell:</p>
+
+<pre><code>python3 setup.py install
+</code></pre>
+
+<p>It is possible that your system calls your Python 3.3 binary something different, such as <code>python</code> (ArchLinux) or <code>py33.exe</code> (some Windows). If this is the case, replace <code>python3</code> in the above example with the proper executable.</p>
+
+<p>rpcalc should now be installed. Type rpcalc into a command shell to run it.</p>
+
+<h3>
+<a name="running-rpcalc-for-testing" class="anchor" href="#running-rpcalc-for-testing"><span class="octicon octicon-link"></span></a>Running rpcalc for Testing</h3>
+
+<p>If you would prefer <em>not</em> to install rpcalc to your system, follow these instructions.</p>
+
+<p>Switch to the rpcalc directory, and run the following from a command shell:</p>
+
+<pre><code>python3 rpcalc.py
 </code></pre>
 
 <p>It is possible that your system calls your Python 3.3 binary something different, such as <code>python</code> (ArchLinux) or <code>py33.exe</code> (some Windows). If this is the case, replace <code>python3</code> in the above example with the proper executable.</p>
