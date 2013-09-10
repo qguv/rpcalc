@@ -31,7 +31,6 @@ def operate(symbol, stack):
     Takes a symbol and a stack, performs the associated
     operation on the stack, and returns any errors.
     '''
-    global errors
     if stack.canOperate(getArgReq(symbol)):
         fn = ops.bindings[symbol][0] # get operation fn name
         try:
@@ -130,10 +129,10 @@ def keyHandler(stack, buf, errors):
 
 # the big guns
 def readCalc(stack): # fourth re-write!
-    global errors #TODO there has to be a better way
-    buf,printFlag = '',False
+    #global errors #TODO there has to be a better way
+    buf, errors, printFlag = '', '', False
     while True:
-        if printFlag:
+        if printFlag: #TODO: this is really ugly
             # replaces normal print with a view of the stack
             showStack(stack, buf)
             printFlag = False
@@ -149,3 +148,5 @@ def main():
     mainStack = Stack([], 'mainstack')
     readCalc(mainStack)
 
+if __name__ == "__main__":
+    main()

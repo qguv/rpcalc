@@ -432,10 +432,18 @@ def DebugIter(stack):
     A debug function. May break rpcalc.
     '''
     a = stack.pop()
-    a_ = int(math.floor(a)) # a-prime
-    for i in range(1, (a_ + 1)):
-        stack.push(i)
-    return "pushed " + str(a_) + " entries."
+    a = int(math.floor(a))
+    if a > 1:
+        for i in range(1, (a + 1)):
+            stack.push(i)
+        return "pushed " + str(a) + " entries."
+    elif a = 1:
+        stack.push(1)
+        return "pushed 1 entry."
+    elif a = 0:
+        return "pushed 0 entries."
+    elif a < 0:
+        return "xkcd.com/1245 !"
 
 def Help(stack):
     '''

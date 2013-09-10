@@ -10,7 +10,10 @@ Changelog
 - more descriptive/useful error messages
 
 ### Fixes:
+- rpn now runs directly for backwards compatability and to help future hackers
 - clear will no longer complain about an empty stack
+- improved debug operator
+- improved efficiency (eliminated globals)
 
 ## Version 0.4
 
