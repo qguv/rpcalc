@@ -1,6 +1,21 @@
 Changelog
 =========
 
+## Version 0.5
+
+### Modification:
+- project restructured to be easier to install and compatable with the arch distribution system
+
+### Additions:
+- real installation process with [distutils](http://docs.python.org/3.3/library/distutils.html)
+- more descriptive/useful error messages
+
+### Fixes:
+- rpn now runs directly for backwards compatability and to help future hackers
+- clear will no longer complain about an empty stack
+- improved debug operator
+- improved efficiency (eliminated globals)
+
 ## Version 0.4
 
 ### Additions:

@@ -3,13 +3,11 @@
 # for more info, see github.com/qguv/rpcalc
 
 import math
-from stack import Stack
-from inout import clear
-
-errors = ''
+from rpcalc.stack import Stack
+from rpcalc.inout import clear
 
 # Getch operations
-from inout import getch as rawGetch
+from rpcalc.inout import getch as rawGetch
 def getch():
     rawChar = rawGetch()
     if rawChar == 'Q': # naive escape
@@ -21,7 +19,7 @@ def getch():
     return inpChar
 
 # operator management functions
-import operators as ops
+import rpcalc.operators as ops
 
 def getArgReq(symbol):
     return ops.bindings[symbol][1]
@@ -31,7 +29,6 @@ def operate(symbol, stack):
     Takes a symbol and a stack, performs the associated
     operation on the stack, and returns any errors.
     '''
-    global errors
     if stack.canOperate(getArgReq(symbol)):
         fn = ops.bindings[symbol][0] # get operation fn name
         try:
@@ -80,7 +77,7 @@ def operHandler(stack, buf):
             if len(buf) != 0: # if there are any numbers to enter
                 stack.push(float(buf))
             operBuf = ''
-            return ('','not an operator!',False)
+            return ('','not an operator! type ? for help.',False)
     else:
         if len(buf) != 0: # if there are any numbers to enter
             stack.push(float(buf))
@@ -122,18 +119,18 @@ def keyHandler(stack, buf, errors):
         # character just inserted is at least a partial operator
             return operHandler(stack, buf)
         elif (buf[-1] == 'e') and (not isNum(buf[:-1])):
-            return ('','not an operator!',False)
+            return ('','not an operator! type ? for help.',False)
         elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
-            return ('','not an operator!',False)
+            return ('','not an operator! type ? for help.',False)
         else:
             return (buf,'',False)
 
 # the big guns
 def readCalc(stack): # fourth re-write!
-    global errors #TODO there has to be a better way
-    buf,printFlag = '',False
+    #global errors #TODO there has to be a better way
+    buf, errors, printFlag = '', '', False
     while True:
-        if printFlag:
+        if printFlag: #TODO: this is really ugly
             # replaces normal print with a view of the stack
             showStack(stack, buf)
             printFlag = False
@@ -145,5 +142,9 @@ def readCalc(stack): # fourth re-write!
 
 
 # DO IT #
-mainStack = Stack([], 'mainstack')
-readCalc(mainStack)
+def main():
+    mainStack = Stack([], 'stack view')
+    readCalc(mainStack)
+
+if __name__ == "__main__":
+    main()

@@ -3,3 +3,8 @@ __*
 *.swp
 .DS_Store
 todo.txt
+dist
+dist/*
+MANIFEST
+build
+build/*

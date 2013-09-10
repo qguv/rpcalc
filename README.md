@@ -11,9 +11,23 @@ rpcalc is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/R
 - Floating-point precision limited only by Python
 
 ## Installation & Execution
-You will need Python 3.3 to run rpcalc. As there are currently no rpcalc binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/). Switch to the rpcalc directory, and run the following from a command shell:
+You will need Python 3.3 or higher to run rpcalc. As there are currently no rpcalc binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/).
 
-    python3 rpn.py
+### Installing to System
+Switch to the rpcalc directory, and run the following from a command shell:
+
+    python3 setup.py install
+
+It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable.
+
+rpcalc should now be installed. Type rpcalc into a command shell to run it.
+
+### Running rpcalc for Testing
+If you would prefer _not_ to install rpcalc to your system, follow these instructions.
+
+Switch to the rpcalc directory, and run the following from a command shell:
+
+    python3 rpcalc.py
 
 It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable.
 

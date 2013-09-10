@@ -3,7 +3,7 @@
 # for more info, see github.com/qguv/rpcalc
 
 import math
-from inout import clear
+from rpcalc.inout import clear
 
 class Stack:
     '''

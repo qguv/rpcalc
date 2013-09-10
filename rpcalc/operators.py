@@ -432,19 +432,30 @@ def DebugIter(stack):
     A debug function. May break rpcalc.
     '''
     a = stack.pop()
-    a_ = int(math.floor(a)) # a-prime
-    for i in range(1, (a_ + 1)):
-        stack.push(i)
-    return "pushed " + str(a_) + " entries."
+    a = int(math.floor(a))
+    if a > 1:
+        for i in range(1, (a + 1)):
+            stack.push(i)
+        return "pushed " + str(a) + " entries."
+    elif a == 1:
+        stack.push(1)
+        return "pushed 1 entry."
+    elif a == 0:
+        return "pushed 0 entries."
+    elif a < 0:
+        return "xkcd.com/1245 !"
 
 def Help(stack):
     '''
     Displays interactive help for on-board and
     extended functions.
     '''
-    import help
-    help.main()
+    import rpcalc.help
+    rpcalc.help.main()
     return "returning to " + stack.name + '.'
+
+def ExitHelp(stack):
+    return "use Shift+Q (capital Q) to quit. type ? for help."
 
 # Bindings cannot include any of the following
 # characters for technical reasons: Q p
@@ -458,7 +469,7 @@ bindings = {
     # Value[1] is the argument requirement
         #### Stack
         'D' :   [Drop      , 1],
-        'C' :   [Clear     , 1],
+        'C' :   [Clear     , 0],
         '#' :   [Length    , 0],
         'w' :   [SwapXY    , 2],
         #### Arithmetic
@@ -503,5 +514,6 @@ bindings = {
         #### Others
         'rand': [Random    , 0],
         'debug':[DebugIter , 1], #DEBUG
-        '?' :   [Help      , 0],
+        '?':    [Help      , 0],
+        ''  : [ExitHelp  , 0],
         }
