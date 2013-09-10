@@ -6,8 +6,6 @@ import math
 from rpcalc.stack import Stack
 from rpcalc.inout import clear
 
-errors = ''
-
 # Getch operations
 from rpcalc.inout import getch as rawGetch
 def getch():
@@ -145,7 +143,7 @@ def readCalc(stack): # fourth re-write!
 
 # DO IT #
 def main():
-    mainStack = Stack([], 'mainstack')
+    mainStack = Stack([], 'stack view')
     readCalc(mainStack)
 
 if __name__ == "__main__":
