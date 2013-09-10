@@ -7,6 +7,7 @@ Changelog
 - project restructured to be easier to install and compatable with the arch distribution system
 
 ### Additions:
+- real installation process with [distutils](http://docs.python.org/3.3/library/distutils.html)
 - more descriptive/useful error messages
 
 ### Fixes:
