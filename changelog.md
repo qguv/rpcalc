@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## __NEXT RELEASE__
+## Version 0.5
 
 ### Modification:
 - project restructured to be easier to install and compatable with the arch distribution system
