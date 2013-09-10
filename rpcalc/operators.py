@@ -437,10 +437,10 @@ def DebugIter(stack):
         for i in range(1, (a + 1)):
             stack.push(i)
         return "pushed " + str(a) + " entries."
-    elif a = 1:
+    elif a == 1:
         stack.push(1)
         return "pushed 1 entry."
-    elif a = 0:
+    elif a == 0:
         return "pushed 0 entries."
     elif a < 0:
         return "xkcd.com/1245 !"
