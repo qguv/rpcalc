@@ -10,6 +10,7 @@ After a release or hotfix branch is prepared, the following tasks will properly 
 **Remember to force `git merge` not to fast forward!**
 
 - [update](https://github.com/qguv/pkgbuilds/edit/master/rpcalc/PKGBUILD) PKGBUILD if necessary
+- bump version number in setup.py
 - Make sure that no `## _NEXT RELEASE_` section exists in `changelog.md`.
 - Merge changes to master _e.g._ `git checkout master` `git merge --no-ff hotfix-0.3.1`.
 - Tag the release on master. Use an annotated tag with the name `v` followed by the semantic version number _e.g._ `git tag -a v0.3.1 -m 'squashes trig bugs'`.
