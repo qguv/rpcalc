@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## Version 0.5.1
+
+### Fixes:
+- fixed an installation bug; a file was missing
+
 ## Version 0.5
 
 ### Modification:
