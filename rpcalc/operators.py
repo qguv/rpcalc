@@ -258,6 +258,14 @@ def ConstE(stack):
 
 #### Logic ####
 
+def CloseEnough(a, b, epsilon=1e-12):
+    '''
+    Not an operator, but a utility function which compares floats and checks
+    for close-equality. This corrects for internal float rounding error.
+    '''
+    from math import fabs
+    return fabs(a - b) < epsilon
+
 def EqTest(stack):
     '''
     Returns 1 if the most recent two stack
@@ -265,7 +273,7 @@ def EqTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a == b else 0
+    r = 1 if CloseEnough(a, b) else 0
     stack.push(r)
 
 def NotTest(stack):
@@ -275,7 +283,7 @@ def NotTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a != b else 0
+    r = 0 if CloseEnough(a, b) else 1
     stack.push(r)
 
 def LtTest(stack):
@@ -285,7 +293,12 @@ def LtTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a < b else 0
+    if CloseEnough(a, b):
+        r = 0
+    elif a < b:
+        r = 1
+    else:
+        r = 0
     stack.push(r)
 
 def GtTest(stack):
@@ -295,7 +308,12 @@ def GtTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a > b else 0
+    if CloseEnough(a, b):
+        r = 0
+    elif a > b:
+        r = 1
+    else:
+        r = 0
     stack.push(r)
 
 def LtEqTest(stack):
@@ -305,7 +323,12 @@ def LtEqTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a <= b else 0
+    if CloseEnough(a, b):
+        r = 1
+    elif a < b:
+        r = 1
+    else:
+        r = 0
     stack.push(r)
 
 def GtEqTest(stack):
@@ -315,18 +338,23 @@ def GtEqTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a >= b else 0
+    if CloseEnough(a, b):
+        r = 1
+    elif a > b:
+        r = 1
+    else:
+        r = 0
     stack.push(r)
 
 
 #### Trigonometry ####
 
 def TrigRoundFix(roughAnswer):
-# Not an operator, but a utility
-# function that fixes rounding
-# errors in Trig functions which
-# prevent the expected answers:
-# 1, 0, and -1.
+    '''
+    Not an operator, but a utility function that fixes
+    rounding errors in trigonometric functions which
+    prevent tne expected answers 1, 0, and -1.
+    '''
     r = roughAnswer
     if abs(r) < 1e-15:
         r = 0.0
