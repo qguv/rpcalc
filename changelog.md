@@ -3,6 +3,9 @@ Changelog
 
 ## __NEXT RELEASE__
 
+### Fixes:
+- improved equality tests with sigfig-heavy numbers
+
 ## Version 0.5.1
 
 ### Fixes:
