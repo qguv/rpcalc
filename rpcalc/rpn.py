@@ -39,14 +39,22 @@ def operate(symbol, stack):
         return "too few entries for " + symbol + "!"
 
 def isNum(string):
+    '''
+    Tests whether a string can be converted to a float.
+    Output is boolean.
+    '''
     try:
-        float(string)
+        null = float(string)
     except ValueError:
         return False
     else:
         return True
 
 def showCalc(stack, buf, errors):
+    '''
+    If there are errors, display those.
+    Then show the "screen" of the calculator.
+    '''
     clear()
     nonErrors = { '', None, '\n' }
     if errors not in nonErrors:
@@ -126,9 +134,12 @@ def keyHandler(stack, buf, errors):
             return (buf,'',False)
 
 # the big guns
-def readCalc(stack): # fourth re-write!
-    #global errors #TODO there has to be a better way
-    buf, errors, printFlag = '', '', False
+def workLoop(stack, buf, errors, printFlag): # fifth re-write!
+    '''
+    Runs the main loop for an individual stack.
+    Stack-switching can be implemented in the future with another
+    function which is called by main() and calls this function.
+    '''
     while True:
         if printFlag: #TODO: this is really ugly
             # replaces normal print with a view of the stack
@@ -137,14 +148,16 @@ def readCalc(stack): # fourth re-write!
         else:
             showCalc(stack, buf, errors)
             errors = ''
-        buf += getch() # reads from getch in
+        buf += getch() # reads input from user without enter key
         buf, errors, printFlag = keyHandler(stack, buf, errors)
 
 
 # DO IT #
 def main():
-    mainStack = Stack([], 'stack view')
-    readCalc(mainStack)
+    stack = Stack([], 'stack view')
+    buf, errors, printFlag = '', '', False
+    workLoop(stack, buf, errors, printFlag)
 
 if __name__ == "__main__":
     main()
+
