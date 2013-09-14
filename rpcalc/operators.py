@@ -491,57 +491,61 @@ def ExitHelp(stack):
 # another binding. For instance, =< was chosen
 # over <= because it does not begin with (and
 # therefore does not conflict with) <.
-bindings = {
-    # Key is the arithmetic keypress
-    # Value[0] is the paired function
-    # Value[1] is the argument requirement
-        #### Stack
-        'D' :   [Drop      , 1],
-        'C' :   [Clear     , 0],
-        '#' :   [Length    , 0],
-        'w' :   [SwapXY    , 2],
-        #### Arithmetic
-        '+' :   [Add       , 2],
-        '-' :   [Subtract  , 2],
-        '*' :   [Multiply  , 2],
-        'x' :   [Multiply  , 2],
-        '/' :   [Divide    , 2],
-        'n' :   [Negate    , 1],
-        '%' :   [Modulus   , 2],
-        'f' :   [Floor     , 1],
-        'ln':   [Ln        , 1],
-        '^' :   [Power     , 2],
-        'sqrt': [SqRoot    , 1],
-        'abs' : [Absolute  , 1],
-        '!' :   [Factorial , 1],
-        #### Sequence Operators
-        'S' :   [Summation , 1],
-        'P' :   [Product   , 1],
-        #### Statistics
-        'mean': [Mean      , 1],
-        'med' : [Median    , 1],
-        #### Constants
-        'ke':   [ConstE    , 0],
-        'kpi' : [ConstPi   , 0],
-        #### Logic
-        '==':   [EqTest    , 2],
-        '=!':   [NotTest   , 2],
-        '<' :   [LtTest    , 2],
-        '>' :   [GtTest    , 2],
-        '=<':   [LtEqTest  , 2],
-        '=>':   [GtEqTest  , 2],
-        #### Trigonometry
-        'sin' : [Sine      , 1],
-        'cos' : [Cosine    , 1],
-        'tan' : [Tangent   , 1],
-        'asin': [Arcsine   , 1],
-        'acos': [Arccosine , 1],
-        'atan': [Arctangent, 1],
-        'deg' : [ToDegrees , 1],
-        'rad' : [ToRadians , 1],
-        #### Others
-        'rand': [Random    , 0],
-        'debug':[DebugIter , 1], #DEBUG
-        '?':    [Help      , 0],
-        ''  : [ExitHelp  , 0],
-        }
+
+# Key is the arithmetic keypress
+# Value[0] is the paired function
+# Value[1] is the argument requirement
+
+from collections import OrderedDict
+bindings = OrderedDict((
+#### Stack
+    ('D', (Drop, 1)),
+    ('C', (Clear, 0)),
+    ('#', (Length, 0)),
+    ('w', (SwapXY, 2)),
+#### Arithmetic
+    ('+', (Add, 2)),
+    ('-', (Subtract, 2)),
+    ('*', (Multiply, 2)),
+    ('x', (Multiply, 2)),
+    ('/', (Divide, 2)),
+    ('n', (Negate, 1)),
+    ('%', (Modulus, 2)),
+    ('f', (Floor, 1)),
+    ('ln', (Ln, 1)),
+    ('^', (Power, 2)),
+    ('sqrt', (SqRoot, 1)),
+    ('abs', (Absolute, 1)),
+    ('!', (Factorial, 1)),
+#### Sequence Operators
+    ('S', (Summation, 1)),
+    ('P', (Product, 1)),
+#### Statistics
+    ('mean', (Mean, 1)),
+    ('med', (Median, 1)),
+#### Constants
+    ('ke', (ConstE, 0)),
+    ('kpi', (ConstPi, 0)),
+#### Logic
+    ('==', (EqTest, 2)),
+    ('=!', (NotTest, 2)),
+    ('<', (LtTest, 2)),
+    ('>', (GtTest, 2)),
+    ('=<', (LtEqTest, 2)),
+    ('=>', (GtEqTest, 2)),
+#### Trigonometry
+    ('sin', (Sine, 1)),
+    ('cos', (Cosine, 1)),
+    ('tan', (Tangent, 1)),
+    ('asin', (Arcsine, 1)),
+    ('acos', (Arccosine, 1)),
+    ('atan', (Arctangent, 1)),
+    ('deg', (ToDegrees, 1)),
+    ('rad', (ToRadians, 1)),
+#### Others
+    ('rand', (Random, 0)),
+    ('debug', (DebugIter, 1)),#DEBUG
+    ('?', (Help, 0)),
+    ('', (ExitHelp, 0)),
+))
+
