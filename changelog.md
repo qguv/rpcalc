@@ -5,6 +5,7 @@ Changelog
 
 ### Fixes:
 - improved equality tests with sigfig-heavy numbers
+- improved help operator list
 
 ## Version 0.5.1
 
