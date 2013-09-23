@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## __NEXT RELEASE__
+## Version 0.6
 
 ### Fixes:
 - improved equality tests with sigfig-heavy numbers
