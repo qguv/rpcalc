@@ -19,3 +19,4 @@ After a release or hotfix branch is prepared, the following tasks will properly 
 - Write some release notes in [the releases section](https://github.com/qguv/rpcalc/releases) on GitHub. Flag a pre-release if it is necessary.
 - Go to the [GitHub page generator](https://github.com/qguv/rpcalc/generated_pages/new), hit _Load README.md_. Hit _Continue to Layouts_, choose the _Leap Day_ theme, and hit _Publish_.
 - [update](https://github.com/qguv/pkgbuilds/edit/master/rpcalc/PKGBUILD) PKGBUILD if necessary
+- burp upload PKGBUILD with `burp -u qguv -c science rpc<Tab>`
