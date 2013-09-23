@@ -258,6 +258,14 @@ def ConstE(stack):
 
 #### Logic ####
 
+def CloseEnough(a, b, epsilon=1e-12):
+    '''
+    Not an operator, but a utility function which compares floats and checks
+    for close-equality. This corrects for internal float rounding error.
+    '''
+    from math import fabs
+    return fabs(a - b) < epsilon
+
 def EqTest(stack):
     '''
     Returns 1 if the most recent two stack
@@ -265,7 +273,7 @@ def EqTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a == b else 0
+    r = 1 if CloseEnough(a, b) else 0
     stack.push(r)
 
 def NotTest(stack):
@@ -275,7 +283,7 @@ def NotTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a != b else 0
+    r = 0 if CloseEnough(a, b) else 1
     stack.push(r)
 
 def LtTest(stack):
@@ -285,7 +293,12 @@ def LtTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a < b else 0
+    if CloseEnough(a, b):
+        r = 0
+    elif a < b:
+        r = 1
+    else:
+        r = 0
     stack.push(r)
 
 def GtTest(stack):
@@ -295,7 +308,12 @@ def GtTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a > b else 0
+    if CloseEnough(a, b):
+        r = 0
+    elif a > b:
+        r = 1
+    else:
+        r = 0
     stack.push(r)
 
 def LtEqTest(stack):
@@ -305,7 +323,12 @@ def LtEqTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a <= b else 0
+    if CloseEnough(a, b):
+        r = 1
+    elif a < b:
+        r = 1
+    else:
+        r = 0
     stack.push(r)
 
 def GtEqTest(stack):
@@ -315,18 +338,23 @@ def GtEqTest(stack):
     '''
     b = stack.pop()
     a = stack.pop()
-    r = 1 if a >= b else 0
+    if CloseEnough(a, b):
+        r = 1
+    elif a > b:
+        r = 1
+    else:
+        r = 0
     stack.push(r)
 
 
 #### Trigonometry ####
 
 def TrigRoundFix(roughAnswer):
-# Not an operator, but a utility
-# function that fixes rounding
-# errors in Trig functions which
-# prevent the expected answers:
-# 1, 0, and -1.
+    '''
+    Not an operator, but a utility function that fixes
+    rounding errors in trigonometric functions which
+    prevent tne expected answers 1, 0, and -1.
+    '''
     r = roughAnswer
     if abs(r) < 1e-15:
         r = 0.0
@@ -463,57 +491,61 @@ def ExitHelp(stack):
 # another binding. For instance, =< was chosen
 # over <= because it does not begin with (and
 # therefore does not conflict with) <.
-bindings = {
-    # Key is the arithmetic keypress
-    # Value[0] is the paired function
-    # Value[1] is the argument requirement
-        #### Stack
-        'D' :   [Drop      , 1],
-        'C' :   [Clear     , 0],
-        '#' :   [Length    , 0],
-        'w' :   [SwapXY    , 2],
-        #### Arithmetic
-        '+' :   [Add       , 2],
-        '-' :   [Subtract  , 2],
-        '*' :   [Multiply  , 2],
-        'x' :   [Multiply  , 2],
-        '/' :   [Divide    , 2],
-        'n' :   [Negate    , 1],
-        '%' :   [Modulus   , 2],
-        'f' :   [Floor     , 1],
-        'ln':   [Ln        , 1],
-        '^' :   [Power     , 2],
-        'sqrt': [SqRoot    , 1],
-        'abs' : [Absolute  , 1],
-        '!' :   [Factorial , 1],
-        #### Sequence Operators
-        'S' :   [Summation , 1],
-        'P' :   [Product   , 1],
-        #### Statistics
-        'mean': [Mean      , 1],
-        'med' : [Median    , 1],
-        #### Constants
-        'ke':   [ConstE    , 0],
-        'kpi' : [ConstPi   , 0],
-        #### Logic
-        '==':   [EqTest    , 2],
-        '=!':   [NotTest   , 2],
-        '<' :   [LtTest    , 2],
-        '>' :   [GtTest    , 2],
-        '=<':   [LtEqTest  , 2],
-        '=>':   [GtEqTest  , 2],
-        #### Trigonometry
-        'sin' : [Sine      , 1],
-        'cos' : [Cosine    , 1],
-        'tan' : [Tangent   , 1],
-        'asin': [Arcsine   , 1],
-        'acos': [Arccosine , 1],
-        'atan': [Arctangent, 1],
-        'deg' : [ToDegrees , 1],
-        'rad' : [ToRadians , 1],
-        #### Others
-        'rand': [Random    , 0],
-        'debug':[DebugIter , 1], #DEBUG
-        '?':    [Help      , 0],
-        ''  : [ExitHelp  , 0],
-        }
+
+# Key is the arithmetic keypress
+# Value[0] is the paired function
+# Value[1] is the argument requirement
+
+from collections import OrderedDict
+bindings = OrderedDict((
+#### Stack
+    ('D', (Drop, 1)),
+    ('C', (Clear, 0)),
+    ('#', (Length, 0)),
+    ('w', (SwapXY, 2)),
+#### Arithmetic
+    ('+', (Add, 2)),
+    ('-', (Subtract, 2)),
+    ('*', (Multiply, 2)),
+    ('x', (Multiply, 2)),
+    ('/', (Divide, 2)),
+    ('n', (Negate, 1)),
+    ('%', (Modulus, 2)),
+    ('f', (Floor, 1)),
+    ('ln', (Ln, 1)),
+    ('^', (Power, 2)),
+    ('sqrt', (SqRoot, 1)),
+    ('abs', (Absolute, 1)),
+    ('!', (Factorial, 1)),
+#### Sequence Operators
+    ('S', (Summation, 1)),
+    ('P', (Product, 1)),
+#### Statistics
+    ('mean', (Mean, 1)),
+    ('med', (Median, 1)),
+#### Constants
+    ('ke', (ConstE, 0)),
+    ('kpi', (ConstPi, 0)),
+#### Logic
+    ('==', (EqTest, 2)),
+    ('=!', (NotTest, 2)),
+    ('<', (LtTest, 2)),
+    ('>', (GtTest, 2)),
+    ('=<', (LtEqTest, 2)),
+    ('=>', (GtEqTest, 2)),
+#### Trigonometry
+    ('sin', (Sine, 1)),
+    ('cos', (Cosine, 1)),
+    ('tan', (Tangent, 1)),
+    ('asin', (Arcsine, 1)),
+    ('acos', (Arccosine, 1)),
+    ('atan', (Arctangent, 1)),
+    ('deg', (ToDegrees, 1)),
+    ('rad', (ToRadians, 1)),
+#### Others
+    ('rand', (Random, 0)),
+    ('debug', (DebugIter, 1)),#DEBUG
+    ('?', (Help, 0)),
+    ('', (ExitHelp, 0)),
+))
+
