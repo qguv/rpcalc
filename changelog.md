@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## __NEXT RELEASE__
+## Version 0.7
 
 ### Additions:
 - accepts command line arguments; try `rpcalc --help`
