@@ -2,6 +2,8 @@
 # rpcalc exceution script
 # for more info, see github.com/qguv/rpcalc
 
+VERSION = '0.7.1'
+
 import sys, rpcalc, argparse
 
 parser = argparse.ArgumentParser(prog='rpcalc',
@@ -33,42 +35,15 @@ parser.add_argument("--version",
 
 args = parser.parse_args()
 
-def getLineInFile(lineToGet, filename):
-    '''Returns a line (without newline) from a given file. Begins at 1, not 0.'''
-    with open(filename, 'r') as f:
-        for i, line in enumerate(f):
-            if i == lineToGet - 1:
-                line = line[:-1]
-                break
-    return line
-
-def findCurrentVersion():
-    '''Scrapes changelog.md for the current version.'''
-    version = getLineInFile(4, "changelog.md")
-    version = version[3:].lower()
-    return version
-
-def findLastVersion():
-    '''Scrapes changelog.md for the last-released version.'''
-    with open("changelog.md", 'r') as f:
-        for i, line in enumerate(f):
-            if line[:3] == '## ' and i != 3:
-                line = line[3:-1].lower()
-                break
-    return line
-
-# Get version and exit if --version is called
-if args.version:
-    version = findCurrentVersion()
-    if version == "__next release__":
-        version = "post-" + findLastVersion() + " development"
-    print(version)
-    sys.exit()
-
 def panic(code, message):
     '''Gives a pretty error message and exits with an error code.'''
     print("\nerror!", message, "\n")
     sys.exit(code)
+
+# Get version and exit if --version is called
+if args.version:
+    print(VERSION)
+    sys.exit()
 
 # Complain if -e given without -i or with -s
 if args.exclusive and not args.initial_values:
