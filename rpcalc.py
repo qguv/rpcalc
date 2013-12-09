@@ -2,7 +2,7 @@
 # rpcalc exceution script
 # for more info, see github.com/qguv/rpcalc
 
-VERSION = '0.7'
+VERSION = '0.7.1'
 
 import sys, rpcalc, argparse
 
