@@ -20,7 +20,7 @@ After a release or hotfix branch is prepared, the following tasks will properly 
 - Tag the release on master. Use an annotated tag with the name `v` followed by the semantic version number _e.g._ `git tag -a v0.3.1 -m 'squashes trig bugs'`.
 - Push. `git push`
 - Merge changes to develop _e.g._ `git checkout develop && git merge --no-ff hotfix-0.3.1`.
-- Prepare develop for further development _e.g._ `git checkout origin/develop develop.md`; add `## __NEXT RELEASE__ to changelog.md
+- Prepare develop for further development _e.g._ `git checkout origin/develop develop.md`; add `## __NEXT RELEASE__` to changelog.md
 - Commit and push. `git commit -am 'readied for further development' && git push`
 - Delete the release/hotfix branch locally and remotely _e.g._ `git branch -d hotfix-0.3.1` `git push origin :hotfix-0.3.1`
 - Push with `git push` and `git push --tags`.
