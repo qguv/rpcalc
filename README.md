@@ -10,7 +10,7 @@ rpcalc is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/R
 - Choice of unlimited or limited stack length (see [Command-Line Switches](#command-line-switches))
 - User-extendible operators with simple, familiar syntax
 
-## Contents
+### Contents
 - [Installation & Execution](#installation-and-execution)
 - [Operation](#operation)
 - [Command-Line Switches](#command-line-switches)
