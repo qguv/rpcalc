@@ -33,15 +33,37 @@ parser.add_argument("--version",
 
 args = parser.parse_args()
 
-# Get version and exit if --version is called
-if args.version:
+def getLineInFile(lineToGet, filename):
+    '''Returns a line (without newline) from a given file. Begins at 1, not 0.'''
+    with open(filename, 'r') as f:
+        for i, line in enumerate(f):
+            if i == lineToGet - 1:
+                line = line[:-1]
+                break
+    return line
+
+def findCurrentVersion():
+    '''Scrapes changelog.md for the current version.'''
+    version = getLineInFile(4, "changelog.md")
+    version = version[3:].lower()
+    return version
+
+def findLastVersion():
+    '''Scrapes changelog.md for the last-released version.'''
     with open("changelog.md", 'r') as f:
         for i, line in enumerate(f):
-            if i == 3:
-                version = line[3:-1]
+            if line[:3] == '## ' and i != 3:
+                line = line[3:-1].lower()
                 break
-        print(version)
-        sys.exit()
+    return line
+
+# Get version and exit if --version is called
+if args.version:
+    version = findCurrentVersion()
+    if version == "__next release__":
+        version = "post-" + findLastVersion() + " development"
+    print(version)
+    sys.exit()
 
 def panic(code, message):
     '''Gives a pretty error message and exits with an error code.'''
