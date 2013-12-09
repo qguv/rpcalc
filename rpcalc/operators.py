@@ -26,8 +26,9 @@ def Drop(stack):
 def Clear(stack):
     '''
     Discards all stack items, emptying the stack.
+    If the stack is limited, sets all stack entries to 0.
     '''
-    stack.items = list()
+    stack.clear()
 
 def Length(stack):
     '''

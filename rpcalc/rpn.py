@@ -153,9 +153,12 @@ def workLoop(stack, buf, errors, printFlag): # fifth re-write!
 
 
 # DO IT #
-def main():
-    stack = Stack([], 'stack view')
+def main(limit=None, values=None):
+    stack = Stack([], 'stack view', limit=limit)
     buf, errors, printFlag = '', '', False
+    if values:
+        for n in values:
+            stack.push(n)
     workLoop(stack, buf, errors, printFlag)
 
 if __name__ == "__main__":
