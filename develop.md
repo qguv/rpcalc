@@ -18,12 +18,11 @@ After a release or hotfix branch is prepared, the following tasks will properly 
 
 - Merge changes to master _e.g._ `git checkout master && git merge --no-ff hotfix-0.3.1`.
 - Tag the release on master. Use an annotated tag with the name `v` followed by the semantic version number _e.g._ `git tag -a v0.3.1 -m 'squashes trig bugs'`.
-- Push. `git push`
+- Push with `git push` and `git push --tags`.
 - Merge changes to develop _e.g._ `git checkout develop && git merge --no-ff hotfix-0.3.1`.
 - Prepare develop for further development _e.g._ `git checkout origin/develop develop.md`; add `## __NEXT RELEASE__` to changelog.md
 - Commit and push. `git commit -am 'readied for further development' && git push`
 - Delete the release/hotfix branch locally and remotely _e.g._ `git branch -d hotfix-0.3.1` `git push origin :hotfix-0.3.1`
-- Push with `git push` and `git push --tags`.
 - Write some release notes in [the releases section](https://github.com/qguv/rpcalc/releases) on GitHub. Flag a pre-release if it is necessary.
 - Go to the [GitHub page generator](https://github.com/qguv/rpcalc/generated_pages/new), hit _Load README.md_. Hit _Continue to Layouts_, choose the _Leap Day_ theme, and hit _Publish_.
 - [update](https://github.com/qguv/pkgbuilds/edit/master/rpcalc/PKGBUILD) PKGBUILD if necessary
