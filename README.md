@@ -20,7 +20,7 @@ rpcalc is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/R
 You will need Python 3.3 or higher to run rpcalc.
 
 ### Archlinux
-rpcalc is available on the AUR as [rpcalc-git](https://aur.archlinux.org/packages/rpcalc-git/). Install it as you would [any other AUR software](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages).
+The latest stable version of rpcalc is available on the AUR as [rpcalc-git](https://aur.archlinux.org/packages/rpcalc-git/). Install it as you would [any other AUR software](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages).
 
 ### All other systems
 I am working to put rpcalc on many repositories of various linux distributions. Until then, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/).
