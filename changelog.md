@@ -7,6 +7,7 @@ Changelog
 - accepts command line arguments; try `rpcalc --help`
 - accepts a limited stack size (command line `-s`)
 - accepts initial values (command line `-i`)
+- version can be checked via command line `--version`
 
 ## Version 0.6
 
