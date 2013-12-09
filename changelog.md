@@ -2,6 +2,7 @@ Changelog
 =========
 
 ## Version 0.7.1
+- fixes an issue with command-line flag `--version`
 
 ## Version 0.7
 
