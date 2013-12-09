@@ -6,14 +6,26 @@ A reverse polish notation calculator written in Python 3.
 ## About
 rpcalc is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/Reverse_Polish_notation) calculator based on the [HP 11C Scientific Calculator](http://www.hpmuseum.org/hp11c.htm) with extended features, such as:
 
-- An advanced stack datatype with unlimited stack length
+- An advanced stack datatype with native floating-point precision
+- Choice of unlimited or limited stack length (see [Command-Line Switches](#command-line-switches))
 - User-extendible operators with simple, familiar syntax
-- Floating-point precision limited only by Python
 
-## Installation & Execution
-You will need Python 3.3 or higher to run rpcalc. As there are currently no rpcalc binaries, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/).
+### Contents
+- [Installation & Execution](#installation-and-execution)
+- [Operation](#operation)
+- [Command-Line Switches](#command-line-switches)
+- [FAQ](#faq)
 
-### Installing to System
+## Installation and Execution
+You will need Python 3.3 or higher to run rpcalc.
+
+### Archlinux
+The latest stable version of rpcalc is available on the AUR as [rpcalc-git](https://aur.archlinux.org/packages/rpcalc-git/). Install it as you would [any other AUR software](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages).
+
+### All other systems
+I am working to put rpcalc on many repositories of various linux distributions. Until then, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/).
+
+### Installing
 Switch to the rpcalc directory, and run the following from a command shell:
 
     python3 setup.py install
@@ -53,6 +65,7 @@ Your result, `7000014.0`, is now the only entry in the stack. You can confirm th
 _The most recent and second-most recent stack entries will be denoted_ x _and_ y _respectively. You can always peek inside operators.py for a more objective explanation of these functions._
 
 #### Program
+- `?` - enter interactive help mode
 - `p` - prints the stack
 - `Q` - quits the program, **no matter what**
 
@@ -136,8 +149,11 @@ _Results are designated with `>>>`, but these are really stored in the stack and
     2 Enter Enter ==
     >>> 1
 
-### Known Issues
-_currently none._
+## Command-Line Switches
+- `-s` or `--stack-size` - limits the stack size to the integer provided. Empty stack entries become 0 when using a limited-size stack.
+- `-i` or `--initial-values` - takes space-separated numbers and pushes them to the stack.
+- `-e` or `--exclusive` - sets the stack length to the amount of numbers provided with `-i`
+
 
 ## FAQ
 > **I found a bug! Let me email that to you...**
@@ -158,7 +174,11 @@ You will need to use the _change of base formula_:
 
 Arithmetic mean and median return one result, which is pushed into the stack. Mode, maximum, and minimum all have the capacity to produce more than one result. There is no non-arbitrary method of deciding the order in which the multiple answers would be pushed into the stack. Answers like these would be no good if the user didn't know which answer s/he wanted or where it went in the stack. Procedurally, these functions would be easy to write, but there is no clear way to display the answer to the user.
 
-## Motivation
-At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, my workflow, Python 3, and Object-Oriented Programming in general.
+### Known Issues
+- Some of the operators defined in operators.py still have `#DEBUG` tags. This is intentional; these operators will be removed once rpcalc graduates from version zero.
+
+
+### Motivation
+At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, Python 3, and Object-Oriented Programming in general.
 
 -[Quintus](http://github.com/qguv/)

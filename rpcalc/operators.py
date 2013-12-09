@@ -26,8 +26,9 @@ def Drop(stack):
 def Clear(stack):
     '''
     Discards all stack items, emptying the stack.
+    If the stack is limited, sets all stack entries to 0.
     '''
-    stack.items = list()
+    stack.clear()
 
 def Length(stack):
     '''
@@ -463,7 +464,7 @@ def DebugIter(stack):
     a = int(math.floor(a))
     if a > 1:
         for i in range(1, (a + 1)):
-            stack.push(i)
+            stack.push(float(i))
         return "pushed " + str(a) + " entries."
     elif a == 1:
         stack.push(1)
