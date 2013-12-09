@@ -464,7 +464,7 @@ def DebugIter(stack):
     a = int(math.floor(a))
     if a > 1:
         for i in range(1, (a + 1)):
-            stack.push(i)
+            stack.push(float(i))
         return "pushed " + str(a) + " entries."
     elif a == 1:
         stack.push(1)
