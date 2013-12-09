@@ -50,16 +50,34 @@
 <p>rpcalc is a stack-based <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">reverse polish notation</a> calculator based on the <a href="http://www.hpmuseum.org/hp11c.htm">HP 11C Scientific Calculator</a> with extended features, such as:</p>
 
 <ul>
-<li>An advanced stack datatype with unlimited stack length</li>
+<li>An advanced stack datatype with native floating-point precision</li>
+<li>Choice of unlimited or limited stack length (see <a href="#command-line-switches">Command-Line Switches</a>)</li>
 <li>User-extendible operators with simple, familiar syntax</li>
-<li>Floating-point precision limited only by Python</li>
-</ul><h2>
-<a name="installation--execution" class="anchor" href="#installation--execution"><span class="octicon octicon-link"></span></a>Installation &amp; Execution</h2>
+</ul><h3>
+<a name="contents" class="anchor" href="#contents"><span class="octicon octicon-link"></span></a>Contents</h3>
 
-<p>You will need Python 3.3 or higher to run rpcalc. As there are currently no rpcalc binaries, simply download the necessary files from the <a href="http://github.com/qguv/rpcalc/">git repository</a>.</p>
+<ul>
+<li><a href="#installation-and-execution">Installation &amp; Execution</a></li>
+<li><a href="#operation">Operation</a></li>
+<li><a href="#command-line-switches">Command-Line Switches</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul><h2>
+<a name="installation-and-execution" class="anchor" href="#installation-and-execution"><span class="octicon octicon-link"></span></a>Installation and Execution</h2>
+
+<p>You will need Python 3.3 or higher to run rpcalc.</p>
 
 <h3>
-<a name="installing-to-system" class="anchor" href="#installing-to-system"><span class="octicon octicon-link"></span></a>Installing to System</h3>
+<a name="archlinux" class="anchor" href="#archlinux"><span class="octicon octicon-link"></span></a>Archlinux</h3>
+
+<p>The latest stable version of rpcalc is available on the AUR as <a href="https://aur.archlinux.org/packages/rpcalc-git/">rpcalc-git</a>. Install it as you would <a href="https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages">any other AUR software</a>.</p>
+
+<h3>
+<a name="all-other-systems" class="anchor" href="#all-other-systems"><span class="octicon octicon-link"></span></a>All other systems</h3>
+
+<p>I am working to put rpcalc on many repositories of various linux distributions. Until then, simply download the necessary files from the <a href="http://github.com/qguv/rpcalc/">git repository</a>.</p>
+
+<h3>
+<a name="installing" class="anchor" href="#installing"><span class="octicon octicon-link"></span></a>Installing</h3>
 
 <p>Switch to the rpcalc directory, and run the following from a command shell:</p>
 
@@ -115,6 +133,8 @@
 <a name="program" class="anchor" href="#program"><span class="octicon octicon-link"></span></a>Program</h4>
 
 <ul>
+<li>
+<code>?</code> - enter interactive help mode</li>
 <li>
 <code>p</code> - prints the stack</li>
 <li>
@@ -261,12 +281,18 @@
 &gt;&gt;&gt; 1
 </code></pre>
 
-<h3>
-<a name="known-issues" class="anchor" href="#known-issues"><span class="octicon octicon-link"></span></a>Known Issues</h3>
-
-<p><em>currently none.</em></p>
-
 <h2>
+<a name="command-line-switches" class="anchor" href="#command-line-switches"><span class="octicon octicon-link"></span></a>Command-Line Switches</h2>
+
+<ul>
+<li>
+<code>-s</code> or <code>--stack-size</code> - limits the stack size to the integer provided. Empty stack entries become 0 when using a limited-size stack.</li>
+<li>
+<code>-i</code> or <code>--initial-values</code> - takes space-separated numbers and pushes them to the stack.</li>
+<li>
+<code>-e</code> or <code>--exclusive</code> - sets the stack length to the amount of numbers provided with <code>-i</code>
+</li>
+</ul><h2>
 <a name="faq" class="anchor" href="#faq"><span class="octicon octicon-link"></span></a>FAQ</h2>
 
 <blockquote>
@@ -294,10 +320,15 @@
 
 <p>Arithmetic mean and median return one result, which is pushed into the stack. Mode, maximum, and minimum all have the capacity to produce more than one result. There is no non-arbitrary method of deciding the order in which the multiple answers would be pushed into the stack. Answers like these would be no good if the user didn't know which answer s/he wanted or where it went in the stack. Procedurally, these functions would be easy to write, but there is no clear way to display the answer to the user.</p>
 
-<h2>
-<a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h2>
+<h3>
+<a name="known-issues" class="anchor" href="#known-issues"><span class="octicon octicon-link"></span></a>Known Issues</h3>
 
-<p>At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, my workflow, Python 3, and Object-Oriented Programming in general.</p>
+<ul>
+<li>Some of the operators defined in operators.py still have <code>#DEBUG</code> tags. This is intentional; these operators will be removed once rpcalc graduates from version zero.</li>
+</ul><h3>
+<a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h3>
+
+<p>At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, Python 3, and Object-Oriented Programming in general.</p>
 
 <p>-<a href="http://github.com/qguv/">Quintus</a></p>
       </section>
