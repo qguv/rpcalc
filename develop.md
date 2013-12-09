@@ -6,7 +6,7 @@ This project uses the [successful git branching model](http://nvie.com/posts/a-s
 ## Prepare a Release/Hotfix Branch
 - Branch off develop _e.g._ `git checkout develop && git checkout -b hotfix-0.3.1`
 - Delete develop.md
-- Bump version number in setup.py
+- Bump version number in setup.py and rpcalc.py
 - Make sure that no `## __NEXT RELEASE__` section exists in `changelog.md`.
 - Commit and push. `git commit -am 'readied hotfix 0.3.1' && git push`
 
