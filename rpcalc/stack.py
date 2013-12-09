@@ -76,9 +76,8 @@ class Stack:
                 self.items = self.items[1:]
 
     def pop(self):
-        #TODO define "is empty"
         if len(self) == 0:
-            print("empty stack!") #FIXME does this do anything?
+            raise IndexError("empty stack!")
         elif self.limit:
             # With a limited stack, we duplicate the topmost (oldest) entry
             # when the pop operation is called
