@@ -21,22 +21,22 @@ class Stack:
     >>> print(x)
     4.8879
     '''
-    # note: these methods are ordered!
-    # references to other methods are
-    # given with a comment (ref:).
     def __init__(self, initList, name, limit=None):
         self.items = initList
         self.name = name
         self.limit = limit
 
     def __getitem__(self, key):
+        '''Implements slicing.'''
         backKey = -1 * (key + 1)
         return self.items[backKey]
 
     def __len__(self):
+        '''Implements len().'''
         return len(self.items)
 
-    def __str__(self): #ref: len
+    def __str__(self):
+        '''Implements str().'''
         rep = self.name
         if self.name != '': rep += '\n'
         if self.limit:
@@ -54,54 +54,58 @@ class Stack:
             rep += '\n'
         rep += '\n'
         rep += '^ ' * int(math.floor(longestEntry / 2 + 1)) + '^'
-        #looks like entry point
         return rep
 
-    def linearView(self): #ref: getitem, len
-        backList = [ self[i] for i in range(len(self)) ]
-        print(str(backList))
+    def linearView(self):
+        '''Displays stack visually on a single line. Newer entries are on the
+        right.'''
+        return self.items
 
     def clear(self):
+        '''Clears stack. If there's a limit, fill with 0s. Otherwise, deletes
+        all entries.'''
         if self.limit:
             self.items = self.limit * [0.0]
         else:
             self.items = list()
 
     def push(self, item):
+        '''Push a value to the stack. If there is a stack size limit and the
+        stack is overfull, this erases the oldest entry.'''
         self.items.append(item)
-        # If there is a stack size limit and the stack is overfull, erase the
-        # oldest entry
         if self.limit:
             if len(self) > self.limit:
                 self.items = self.items[1:]
 
     def pop(self):
+        '''Pops most recent item from stack. If there is a stack size limit,
+        this duplicates the oldest entry.'''
         if len(self) == 0:
             raise IndexError("empty stack!")
         elif self.limit:
-            # With a limited stack, we duplicate the topmost (oldest) entry
-            # when the pop operation is called
             toReturn = self.items.pop()
             newList = [ self.items[0] ]
             newList.extend(self.items)
             self.items = newList
             return toReturn
         elif not self.limit:
-            # With an unlimited stack, we simply call the appropriate pop
-            # method on the underlying list
             return self.items.pop()
 
     def canOperate(self, argLen):
+        '''Tests whether stack is greater than or equal to a certain size.'''
         if len(self) >= argLen:
             return True
         else:
             return False
 
     def rpnView(self, buf):
-        if buf != '':         # if buffer exists,
-            print(buf)        #   print that
-        elif len(self) >= 1: # if there is an x reg,
-            print(self[0])   #   print that
+        '''If buffer exists, print it.
+        If there is an x register, print it.
+        Print 0 as a last resort.'''
+        if buf != '':
+            print(buf)
+        elif len(self) >= 1:
+            print(self[0])
         else:
-            print(0)          # or just default to 0
+            print(0)
 

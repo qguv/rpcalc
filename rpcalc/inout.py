@@ -6,11 +6,11 @@
 import os
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 
-# I did not write the getch function! Danny Yoo did! http://code.activestate.com/recipes/users/98032/
-# please see http://code.activestate.com/recipes/134892/
+# Getch function written by Danny Yoo
+# http://code.activestate.com/recipes/134892/
 class _Getch:
-    """Gets a single character from standard input.  Does not echo to the
-screen."""
+    '''Gets a single character from standard input.  Does not echo to the
+    screen.'''
     def __init__(self):
         try:
             self.impl = _GetchWindows()

@@ -21,7 +21,7 @@ def Drop(stack):
     '''
     Discards the most recent stack entry.
     '''
-    null = stack.pop()
+    stack.pop()
 
 def Clear(stack):
     '''
@@ -186,9 +186,8 @@ def Factorial(stack):
 #### Sequence Operators ####
 
 def MakeList(stack):
-# another utility function,
-# this time for sequences
-    r = [ stack.pop() for null in range(len(stack)) ]
+    '''A utility function; creates list from stack, newest entry first.'''
+    r = [ stack.pop() for _ in range(len(stack)) ]
     return r
 
 def Summation(stack):
