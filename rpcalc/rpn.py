@@ -99,7 +99,7 @@ def operHandler(stack, buf):
 
     else:
         # Enter numbers to stack if necessary
-        if len(buf) != 0
+        if len(buf) != 0:
             stack.push(float(buf))
         newErrors = operate(operBuf, stack)
         operBuf = ''
@@ -125,7 +125,7 @@ def keyHandler(stack, buf, errors):
                     return ('','',False)
             # Push numbers in buffer to stack
             else:
-                if isNum(buf:[-1]):
+                if isNum(buf[:-1]):
                     stack.push(float(buf[:-1]))
                     return ('','',False)
                 else:
