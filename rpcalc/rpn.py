@@ -85,8 +85,6 @@ def operHandler(stack, buf):
         # if e is being used as a power of ten handler
         if (operBuf[0] == 'e') and (operBuf[-1] in \
                 {str(i) for i in range(10)} | {"+","-"}):
-        # TODO: This isn't the right place for this.
-
             # This input is a number; pass back to calling expression
             buf = buf + operBuf
             operBuf = ''
