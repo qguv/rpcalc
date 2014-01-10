@@ -44,7 +44,10 @@ if args["-s"] and args["-i"] and args["-s"] < len(args["<NUM>"]):
 if args["-e"]:
     stackLength = len(args["<NUM>"])
 else:
-    stackLength = args["-s"] or None
+    try:
+        stackLength = int(args["-s"]) or None
+    except ValueError:
+        stackLength = None
 
 # Determining stack values
 if args["-i"]:
