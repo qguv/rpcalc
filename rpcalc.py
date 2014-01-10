@@ -45,9 +45,13 @@ if args["-e"]:
     stackLength = len(args["<NUM>"])
 else:
     try:
-        stackLength = int(args["-s"]) or None
+        stackLength = int(args["-s"])
     except ValueError:
+    # value not an int
         panic(2, "stack length must be an integer")
+    except TypeError:
+    # value not given
+        stackLength = None
 
 # Determining stack values
 if args["-i"]:
