@@ -5,15 +5,16 @@
 """rpcalc, a reverse polish notation calculator
 
 Usage:
-  rpcalc [-s N] [-i X...]
-  rpcalc [-e] -i X...
+  rpcalc [-s N]
+  rpcalc [-s N] -i <NUM>...
+  rpcalc -e -i <NUM>...
   rpcalc (-h | --help)
   rpcalc --version
 
 Options:
   -h --help     Show this screen.
   -s N          Limit length of stack to N elements.
-  -i X...       Push following elements to stack.
+  -i            Push following numbers to stack.
   -e            Limit stack length to amount of elements given with -i.
   --version     Display version.
 
@@ -36,19 +37,19 @@ def panic(code, message):
     sys.exit(code)
 
 # Complain if length of stack is less than amount of initial values
-if args["-s"] and args["-i"] and args["-s"] < len(args["i"]):
+if args["-s"] and args["-i"] and args["-s"] < len(args["<NUM>"]):
     panic(2, "too many initial values for allocated stack size")
 
 # Determining length of stack
 if args["-e"]:
-    stackLength = len(args["-i"])
+    stackLength = len(args["<NUM>"])
 else:
     stackLength = args["-s"] or None
 
 # Determining stack values
 if args["-i"]:
     try:
-        values = [ float(x) for x in args["-i"] ]
+        values = [ float(x) for x in args["<NUM>"] ]
     except ValueError:
         panic(2, "-i (--initial-values) only accepts numbers")
 else:
