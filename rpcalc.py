@@ -5,15 +5,15 @@
 """rpcalc, a reverse polish notation calculator
 
 Usage:
-  rpcalc [-s N] [-i X ...]
-  rpcalc [-e] -i X ...
+  rpcalc [-s N] [-i X...]
+  rpcalc [-e] -i X...
   rpcalc (-h | --help)
   rpcalc --version
 
 Options:
   -h --help     Show this screen.
   -s N          Limit length of stack to N elements.
-  -i X ...      Push following elements to stack.
+  -i X...       Push following elements to stack.
   -e            Limit stack length to amount of elements given with -i.
   --version     Display version.
 
@@ -27,7 +27,6 @@ from docopt import docopt
 
 if __name__ == '__main__':
     args = docopt(__doc__, version=VERSION)
-    print(args)
 
 import sys, rpcalc
 
@@ -36,32 +35,20 @@ def panic(code, message):
     print("\nerror!", message, "\n")
     sys.exit(code)
 
-# Get version and exit if --version is called
-if args.version:
-    print(VERSION)
-    sys.exit()
-
-# Complain if -e given without -i or with -s
-if args.exclusive and not args.initial_values:
-    panic(2, "-e (--exclusive) can only be used with -i (--initial-values)")
-elif args.exclusive and args.stack_size:
-    panic(2, "-e (--exclusive) can not be used with -s (--stack-size)")
-
 # Complain if length of stack is less than amount of initial values
-if args.stack_size and args.initial_values:
-    if args.stack_size < len(args.initial_values):
-        panic(2, "too many initial values for allocated stack size")
+if args["-s"] and args["-i"] and args["-s"] < len(args["i"]):
+    panic(2, "too many initial values for allocated stack size")
 
 # Determining length of stack
-if args.exclusive:
-    stackLength = len(args.initial_values)
+if args["-e"]:
+    stackLength = len(args["-i"])
 else:
-    stackLength = args.stack_size or None
+    stackLength = args["-s"] or None
 
 # Determining stack values
-if args.initial_values:
+if args["-i"]:
     try:
-        values = [ float(x) for x in args.initial_values ]
+        values = [ float(x) for x in args["-i"] ]
     except ValueError:
         panic(2, "-i (--initial-values) only accepts numbers")
 else:
