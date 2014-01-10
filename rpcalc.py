@@ -37,7 +37,7 @@ args = parser.parse_args()
 
 def panic(code, message):
     '''Gives a pretty error message and exits with an error code.'''
-    print("\nerror!", message, "\n")
+    print("error!", message)
     sys.exit(code)
 
 # Get version and exit if --version is called
