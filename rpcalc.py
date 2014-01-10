@@ -54,7 +54,7 @@ if args["-i"]:
     try:
         values = [ float(x) for x in args["<NUM>"] ]
     except ValueError:
-        panic(2, "-i (--initial-values) only accepts numbers")
+        panic(2, "-i only accepts numbers")
 else:
     values = []
 
