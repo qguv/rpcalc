@@ -2,74 +2,65 @@
 # rpcalc exceution script
 # for more info, see github.com/qguv/rpcalc
 
+"""rpcalc, a reverse polish notation calculator
+
+Usage:
+  rpcalc [-s N]
+  rpcalc [-s N] -i <NUM>...
+  rpcalc -e -i <NUM>...
+  rpcalc (-h | --help)
+  rpcalc --version
+
+Options:
+  -h --help     Show this screen.
+  -s N          Limit length of stack to N elements.
+  -i            Push following numbers to stack.
+  -e            Limit stack length to amount of elements given with -i.
+  --version     Display version.
+
+rpcalc is written in Python 3 by Quint Guvernator and licensed by the GPLv3.
+For more information, see <http://qguv.github.io/rpcalc>.
+"""
+
 VERSION = '0.7.1'
 
-import sys, rpcalc, argparse
+from docopt import docopt
 
-parser = argparse.ArgumentParser(prog='rpcalc',
-    description="A reverse polish notation calculator written in Python 3.",
-    epilog="For more information, see qguv.github.io/rpcalc")
+if __name__ == '__main__':
+    args = docopt(__doc__, version=VERSION)
 
-parser.add_argument("-s", "--stack-size",
-    help="Limits the stack to a certain number of entries",
-    type=int,
-    metavar='N',
-    default=None)
-
-parser.add_argument("-i", "--initial-values",
-    help="Initializes the stack with certain values already pushed. Accepts numbers separated by spaces. Values are pushed in order.",
-    # The type is a string here to enable both int and float input. It will be
-    # converted later, and throw an error if appropriate.
-    type=str,
-    nargs='+',
-    metavar="X",
-    default=None)
-
-parser.add_argument("-e", "--exclusive",
-    help="Sets the stack length to the amount of initialized values given with -i.",
-    action="store_true")
-
-parser.add_argument("--version",
-    help="Prints the program version and exits.",
-    action="store_true")
-
-args = parser.parse_args()
+import sys, rpcalc
 
 def panic(code, message):
     '''Gives a pretty error message and exits with an error code.'''
     print("error!", message)
     sys.exit(code)
 
-# Get version and exit if --version is called
-if args.version:
-    print(VERSION)
-    sys.exit()
-
-# Complain if -e given without -i or with -s
-if args.exclusive and not args.initial_values:
-    panic(2, "-e (--exclusive) can only be used with -i (--initial-values)")
-elif args.exclusive and args.stack_size:
-    panic(2, "-e (--exclusive) can not be used with -s (--stack-size)")
-
-# Complain if length of stack is less than amount of initial values
-if args.stack_size and args.initial_values:
-    if args.stack_size < len(args.initial_values):
-        panic(2, "too many initial values for allocated stack size")
-
 # Determining length of stack
-if args.exclusive:
-    stackLength = len(args.initial_values)
+if args["-e"]:
+    stackLength = len(args["<NUM>"])
 else:
-    stackLength = args.stack_size or None
+    try:
+        stackLength = int(args["-s"])
+    except ValueError:
+    # value not an int
+        panic(2, "stack length must be an integer")
+    except TypeError:
+    # value not given
+        stackLength = None
 
 # Determining stack values
-if args.initial_values:
+if args["-i"]:
     try:
-        values = [ float(x) for x in args.initial_values ]
+        values = [ float(x) for x in args["<NUM>"] ]
     except ValueError:
         panic(2, "-i (--initial-values) only accepts numbers")
 else:
     values = []
+
+# Complain if length of stack is less than amount of initial values
+if args["-s"] and args["-i"] and stackLength < len(values):
+    panic(2, "too many initial values for allocated stack size")
 
 # If the stack is limited, pad the values we found above with zeroes to make
 # the stack of the desired length
