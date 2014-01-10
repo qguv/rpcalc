@@ -36,10 +36,6 @@ def panic(code, message):
     print("\nerror!", message, "\n")
     sys.exit(code)
 
-# Complain if length of stack is less than amount of initial values
-if args["-s"] and args["-i"] and args["-s"] < len(args["<NUM>"]):
-    panic(2, "too many initial values for allocated stack size")
-
 # Determining length of stack
 if args["-e"]:
     stackLength = len(args["<NUM>"])
@@ -61,6 +57,10 @@ if args["-i"]:
         panic(2, "-i (--initial-values) only accepts numbers")
 else:
     values = []
+
+# Complain if length of stack is less than amount of initial values
+if args["-s"] and args["-i"] and stackLength < len(values):
+    panic(2, "too many initial values for allocated stack size")
 
 # If the stack is limited, pad the values we found above with zeroes to make
 # the stack of the desired length
