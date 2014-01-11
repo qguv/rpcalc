@@ -3,6 +3,15 @@ Changelog
 
 ## __NEXT RELEASE__
 
+### Modifications:
+- improved help thanks to [docopt][]
+- now uses [docopt][] (not in the standard library) for command-line arguments
+- improves error messages for command-line options
+- follows standard [PEP8][] formatting for all source code
+
+[docopt]: https://github.com/docopt/docopt
+[PEP8]: http://www.python.org/dev/peps/pep-0008/
+
 ## Version 0.7.1
 - fixes an issue with command-line flag `--version`
 

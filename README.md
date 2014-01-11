@@ -29,7 +29,11 @@ The latest stable version of rpcalc is available on the AUR as [rpcalc-git][]. I
 [AUR guide]: https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages
 
 ### All other systems
-I am working to put rpcalc on many repositories of various linux distributions. Until then, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/).
+I am working to put rpcalc on many repositories of various linux distributions. Until then, use these instructions:
+
+rpcalc depends on [docopt][], so install that first.
+
+Download the necessary files from the [git repository][rpcalc on github].
 
 Switch to the rpcalc directory, and run the following from a command shell:
 
@@ -38,6 +42,9 @@ Switch to the rpcalc directory, and run the following from a command shell:
 It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable.
 
 rpcalc should now be installed. Type rpcalc into a command shell to run it.
+
+[docopt]: https://github.com/docopt/docopt
+[rpcalc on github]: http://github.com/qguv/rpcalc/
 
 ### Running rpcalc for Testing
 If you would prefer _not_ to install rpcalc to your system, follow these instructions.
