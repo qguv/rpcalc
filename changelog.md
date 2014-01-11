@@ -1,5 +1,4 @@
-Changelog
-=========
+# Changelog
 
 ## __NEXT RELEASE__
 
