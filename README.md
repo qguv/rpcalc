@@ -4,11 +4,14 @@ A reverse polish notation calculator written in Python 3.
 
 
 ## About
-rpcalc is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/Reverse_Polish_notation) calculator based on the [HP 11C Scientific Calculator](http://www.hpmuseum.org/hp11c.htm) with extended features, such as:
+rpcalc is a stack-based [reverse polish notation][rpn] calculator based on the [HP 11C Scientific Calculator][11c] with extended features, such as:
 
 - An advanced stack datatype with native floating-point precision
 - Choice of unlimited or limited stack length (see [Command-Line Switches](#command-line-switches))
 - User-extendible operators with simple, familiar syntax
+
+[rpn]: http://en.wikipedia.org/wiki/Reverse_Polish_notation
+[11c]: http://www.hpmuseum.org/hp11c.htm
 
 ### Contents
 - [Installation & Execution](#installation-and-execution)
@@ -20,12 +23,14 @@ rpcalc is a stack-based [reverse polish notation](http://en.wikipedia.org/wiki/R
 You will need Python 3.3 or higher to run rpcalc.
 
 ### Archlinux
-The latest stable version of rpcalc is available on the AUR as [rpcalc-git](https://aur.archlinux.org/packages/rpcalc-git/). Install it as you would [any other AUR software](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages).
+The latest stable version of rpcalc is available on the AUR as [rpcalc-git][]. Install it as you would [any other AUR software][AUR guide].
+
+[rpcalc-git]: https://aur.archlinux.org/packages/rpcalc-git/
+[AUR guide]: https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages
 
 ### All other systems
 I am working to put rpcalc on many repositories of various linux distributions. Until then, simply download the necessary files from the [git repository](http://github.com/qguv/rpcalc/).
 
-### Installing
 Switch to the rpcalc directory, and run the following from a command shell:
 
     python3 setup.py install
@@ -44,7 +49,9 @@ Switch to the rpcalc directory, and run the following from a command shell:
 It is possible that your system calls your Python 3.3 binary something different, such as `python` (ArchLinux) or `py33.exe` (some Windows). If this is the case, replace `python3` in the above example with the proper executable.
 
 ## Operation
-rpcalc uses a stack for all operations. Users unfamiliar with RPN or stack-based calculation are encouraged to read [**Basic Example**](#basic-example) below and a [general RPN tutorial](http://glow.sourceforge.net/tutorial/lesson7/side_rpn.html) (short and sweet).
+rpcalc uses a stack for all operations. Users unfamiliar with RPN or stack-based calculation are encouraged to read [**Basic Example**](#basic-example) below and a [general RPN tutorial][] (short and sweet).
+
+[general RPN tutorial]: http://glow.sourceforge.net/tutorial/lesson7/side_rpn.html
 
 ### Basic Example
 To multiply seven by the sum of two and one million:
@@ -99,8 +106,11 @@ _The most recent and second-most recent stack entries will be denoted_ x _and_ y
 #### Constants
 _in rpcalc, constant operators begin with `k` to prevent conflicts with other operators_
 
-- `ke` - returns [Euler's number](http://en.wikipedia.org/wiki/E_%28mathematical_constant%29): the base of the natural logarithm and the exponential function
-- `kpi` - returns [pi](http://en.wikipedia.org/wiki/Pi): the ratio of a circle's circumference to its diameter
+- `ke` - returns [Euler's number][]: the base of the natural logarithm and the exponential function
+- `kpi` - returns [pi][]: the ratio of a circle's circumference to its diameter
+
+[Euler's number]: http://en.wikipedia.org/wiki/E_%28mathematical_constant%29
+[pi]: http://en.wikipedia.org/wiki/Pi
 
 #### Logic
 - `==` - returns 1 if _x_ is equal to _y_, otherwise returns 0
@@ -158,7 +168,9 @@ _Results are designated with `>>>`, but these are really stored in the stack and
 ## FAQ
 > **I found a bug! Let me email that to you...**
 
-Thank you, but please don't email me the bug! Make sure it's not a [known issue](#known-issues), and write me a bug report [here](https://github.com/qguv/rpcalc/issues/new) or if you're familiar with git: fork, fix, and file a pull request.
+Thank you, but please don't email me the bug! Make sure it's not a [known issue](#known-issues), and write me a bug report [here][rpcalc issues] or if you're familiar with git: fork, fix, and file a pull request.
+
+[rpcalc issues]: https://github.com/qguv/rpcalc/issues/new
 
 > **How do I do log base _x_?**
 
@@ -176,7 +188,6 @@ Arithmetic mean and median return one result, which is pushed into the stack. Mo
 
 ### Known Issues
 - Some of the operators defined in operators.py still have `#DEBUG` tags. This is intentional; these operators will be removed once rpcalc graduates from version zero.
-
 
 ### Motivation
 At time of writing (August 2013), no stack-based RPN existed with the features and extensibility for which the author was looking. This project is meant to be a test of git, GitHub, vim, Python 3, and Object-Oriented Programming in general.
