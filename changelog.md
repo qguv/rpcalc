@@ -31,8 +31,10 @@ Changelog
 - project restructured to be easier to install and compatable with the arch distribution system
 
 ### Additions:
-- real installation process with [distutils](http://docs.python.org/3.3/library/distutils.html)
+- real installation process with [distutils][]
 - more descriptive/useful error messages
+
+[distutils]: http://docs.python.org/3.3/library/distutils.html
 
 ### Fixes:
 - rpn now runs directly for backwards compatability and to help future hackers
