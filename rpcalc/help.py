@@ -16,7 +16,7 @@ q - leave help
 Q - quit rpcalc
 '''
 
-pause = 'Press any key to continue...'
+pause = "Press any key to continue..."
 
 def getHelp(symbol):
     fn = ops.bindings[symbol][0] # get operation fn name

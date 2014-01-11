@@ -46,14 +46,14 @@ class Stack:
             longestEntry = max( [ len(str(i)) for i in self.items ] )
         else:
             longestEntry = 3
-        rep += '--' * int(math.floor(longestEntry / 2 + 1)) + '-'
+        rep += "--" * int(math.floor(longestEntry / 2 + 1)) + '-'
         rep += '\n'
         for i in range(len(self.items)):
             rep += ' '
             rep += str(self.items[i])
             rep += '\n'
         rep += '\n'
-        rep += '^ ' * int(math.floor(longestEntry / 2 + 1)) + '^'
+        rep += "^ " * int(math.floor(longestEntry / 2 + 1)) + '^'
         return rep
 
     def linearView(self):

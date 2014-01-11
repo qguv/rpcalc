@@ -22,11 +22,11 @@ rpcalc is written in Python 3 by Quint Guvernator and licensed by the GPLv3.
 For more information, see <http://qguv.github.io/rpcalc>.
 """
 
-VERSION = '0.7.1'
+VERSION = "0.7.1"
 
 from docopt import docopt
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = docopt(__doc__, version=VERSION)
 
 import sys, rpcalc

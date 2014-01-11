@@ -65,7 +65,7 @@ def showStack(stack, buf):
         print(stack)
     except KeyboardInterrupt:
         clear()
-        print('too large to display!')
+        print("too large to display!")
         stack.rpnView(buf)
 
 def operHandler(stack, buf):
@@ -84,7 +84,7 @@ def operHandler(stack, buf):
 
         # if e is being used as a power of ten handler
         if (operBuf[0] == 'e') and (operBuf[-1] in \
-                {str(i) for i in range(10)} | {"+","-"}):
+                {str(i) for i in range(10)} | {'+','-'}):
             # This input is a number; pass back to calling expression
             buf = buf + operBuf
             operBuf = ''
@@ -95,7 +95,7 @@ def operHandler(stack, buf):
             if len(buf) != 0:
                 stack.push(float(buf))
             operBuf = ''
-            return ('','not an operator! type ? for help.',False)
+            return ('',"not an operator! type ? for help.",False)
 
     else:
         # Enter numbers to stack if necessary
@@ -139,9 +139,9 @@ def keyHandler(stack, buf, errors):
         # character just inserted begins an operator
             return operHandler(stack, buf)
         elif (buf[-1] == 'e') and (not isNum(buf[:-1])):
-            return ('','not an operator! type ? for help.',False)
-        elif buf[-1] not in ({str(i) for i in range(10)} | {".","e"}):
-            return ('','not an operator! type ? for help.',False)
+            return ('',"not an operator! type ? for help.",False)
+        elif buf[-1] not in ({str(i) for i in range(10)} | {'.','e'}):
+            return ('',"not an operator! type ? for help.",False)
         else:
             return (buf,'',False)
 
@@ -164,7 +164,7 @@ def stackLoop(stack, buf, errors, printFlag):
 def main(limit=None, values=None):
     '''Creates a generic stack and runs rpcalc. Takes parameters limit and
     value, which both default to None.'''
-    stack = Stack([], 'stack view', limit=limit)
+    stack = Stack([], "stack view", limit=limit)
     buf, errors, printFlag = '', '', False
     if values:
         for n in values:

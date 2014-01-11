@@ -4,7 +4,7 @@
 
 # definition of Clear function
 import os
-clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
+clear = lambda: os.system("cls" if os.name=="nt" else "clear")
 
 # Getch function written by Danny Yoo
 # http://code.activestate.com/recipes/134892/
