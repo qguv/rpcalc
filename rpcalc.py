@@ -29,7 +29,9 @@ from docopt import docopt
 if __name__ == "__main__":
     args = docopt(__doc__, version=VERSION)
 
-import sys, rpcalc
+import sys
+import rpcalc
+
 
 def panic(code, message):
     '''Gives a pretty error message and exits with an error code.'''
@@ -52,7 +54,7 @@ else:
 # Determining stack values
 if args["-i"]:
     try:
-        values = [ float(x) for x in args["<NUM>"] ]
+        values = [float(x) for x in args["<NUM>"]]
     except ValueError:
         panic(2, "-i only accepts numbers")
 else:
@@ -71,4 +73,3 @@ if stackLength:
         values = padding + values
 
 sys.exit(rpcalc.main(limit=stackLength, values=values))
-

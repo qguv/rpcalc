@@ -5,12 +5,11 @@
 from distutils.core import setup
 
 if __name__ == '__main__':
-    setup(  name = "rpcalc",
-            version = "0.7.1",
-            description = "A reverse polish notation calculator written in Python 3.",
-            author = "Quint Guvernator",
-            author_email = "quintus.public@gmail.com",
-            url = "https://github.com/qguv/rpcalc",
-            scripts = ["scripts/rpcalc"],
-            packages = ["rpcalc"],
-    )
+    setup(name="rpcalc",
+          version="0.7.1",
+          description="A reverse polish notation calculator written in Python 3.",
+          author="Quint Guvernator",
+          author_email="quintus.public@gmail.com",
+          url="https://github.com/qguv/rpcalc",
+          scripts=["scripts/rpcalc"],
+          packages=["rpcalc"])

@@ -23,12 +23,14 @@ def Drop(stack):
     '''
     stack.pop()
 
+
 def Clear(stack):
     '''
     Discards all stack items, emptying the stack.
     If the stack is limited, sets all stack entries to 0.
     '''
     stack.clear()
+
 
 def Length(stack):
     '''
@@ -42,6 +44,7 @@ def Length(stack):
     else:
         return stack.name + " has " + str(stackLength) + " entries."
 
+
 def DupX(stack):
     '''
     Pushes a copy of the newest entry to the stack.
@@ -49,6 +52,7 @@ def DupX(stack):
     a = stack.pop()
     stack.push(a)
     stack.push(a)
+
 
 def SwapXY(stack):
     '''
@@ -71,6 +75,7 @@ def Add(stack):
     a = stack.pop()
     stack.push(a + b)
 
+
 def Subtract(stack):
     '''
     Combines the most recent two stack entries by subtracting
@@ -80,6 +85,7 @@ def Subtract(stack):
     a = stack.pop()
     stack.push(a - b)
 
+
 def Multiply(stack):
     '''
     Combines the most recent two stack entries by multiplying.
@@ -87,6 +93,7 @@ def Multiply(stack):
     b = stack.pop()
     a = stack.pop()
     stack.push(a * b)
+
 
 def Divide(stack):
     '''
@@ -96,12 +103,13 @@ def Divide(stack):
     b = stack.pop()
     a = stack.pop()
     if b == 0:
-        stack.push(a) # return dividend to stack
+        stack.push(a)  # return dividend to stack
         # divisor (0) gets the boot
         return "can't divide by 0!"
     else:
         r = a / b
         stack.push(r)
+
 
 def Negate(stack):
     '''
@@ -109,6 +117,7 @@ def Negate(stack):
     '''
     a = stack.pop()
     stack.push(-1 * a)
+
 
 def Modulus(stack):
     '''
@@ -119,6 +128,7 @@ def Modulus(stack):
     a = stack.pop()
     stack.push(a % b)
 
+
 def Floor(stack):
     '''
     Rounds the most recent stack entry down to an integer.
@@ -126,17 +136,19 @@ def Floor(stack):
     a = stack.pop()
     stack.push(math.floor(a))
 
+
 def Ln(stack):
     '''
     Finds the natural logarithm of the most recent stack
     entry and replaces the entry with the result.
     '''
     a = stack.pop()
-    if a <= 0: 
+    if a <= 0:
         return "out of domain!"
     else:
         r = math.log(a)
-        stack.push(r) # push the answer
+        stack.push(r)  # push the answer
+
 
 def Power(stack):
     '''
@@ -146,6 +158,7 @@ def Power(stack):
     b = stack.pop()
     a = stack.pop()
     stack.push(a ** b)
+
 
 def SqRoot(stack):
     '''
@@ -159,6 +172,7 @@ def SqRoot(stack):
         r = math.sqrt(a)
         stack.push(r)
 
+
 def Absolute(stack):
     '''
     If the most recent stack entry is negative, it is
@@ -167,6 +181,7 @@ def Absolute(stack):
     a = stack.pop()
     r = abs(a)
     stack.push(r)
+
 
 def Factorial(stack):
     '''
@@ -187,8 +202,9 @@ def Factorial(stack):
 
 def MakeList(stack):
     '''A utility function; creates list from stack, newest entry first.'''
-    r = [ stack.pop() for _ in range(len(stack)) ]
+    r = [stack.pop() for _ in range(len(stack))]
     return r
+
 
 def Summation(stack):
     '''
@@ -197,6 +213,7 @@ def Summation(stack):
     '''
     r = math.fsum(MakeList(stack))
     stack.push(r)
+
 
 def Product(stack):
     '''
@@ -220,6 +237,7 @@ def Mean(stack):
     seq = MakeList(stack)
     r = sum(seq) / len(seq)
     stack.push(r)
+
 
 def Median(stack):
     '''
@@ -248,6 +266,7 @@ def ConstPi(stack):
     r = math.pi
     stack.push(r)
 
+
 def ConstE(stack):
     '''
     Pushes "Euler's Number" to the stack.
@@ -266,6 +285,7 @@ def CloseEnough(a, b, epsilon=1e-12):
     from math import fabs
     return fabs(a - b) < epsilon
 
+
 def EqTest(stack):
     '''
     Returns 1 if the most recent two stack
@@ -276,6 +296,7 @@ def EqTest(stack):
     r = 1 if CloseEnough(a, b) else 0
     stack.push(r)
 
+
 def NotTest(stack):
     '''
     Returns 0 if the most recent two stack
@@ -285,6 +306,7 @@ def NotTest(stack):
     a = stack.pop()
     r = 0 if CloseEnough(a, b) else 1
     stack.push(r)
+
 
 def LtTest(stack):
     '''
@@ -301,6 +323,7 @@ def LtTest(stack):
         r = 0
     stack.push(r)
 
+
 def GtTest(stack):
     '''
     Returns 1 if the second-newest stack entry is
@@ -316,6 +339,7 @@ def GtTest(stack):
         r = 0
     stack.push(r)
 
+
 def LtEqTest(stack):
     '''
     Returns 1 if the second-newest stack entry is
@@ -330,6 +354,7 @@ def LtEqTest(stack):
     else:
         r = 0
     stack.push(r)
+
 
 def GtEqTest(stack):
     '''
@@ -358,11 +383,12 @@ def TrigRoundFix(roughAnswer):
     r = roughAnswer
     if abs(r) < 1e-15:
         r = 0.0
-    elif abs(r-1) < 1e-15:
+    elif abs(r - 1) < 1e-15:
         r = 1.0
-    elif abs(r+1) < 1e-15:
+    elif abs(r + 1) < 1e-15:
         r = -1.0
     return r
+
 
 def Sine(stack):
     '''
@@ -374,6 +400,7 @@ def Sine(stack):
     r = TrigRoundFix(r)
     stack.push(r)
 
+
 def Cosine(stack):
     '''
     Returns the trigonometric "cos()" of the most recent
@@ -384,6 +411,7 @@ def Cosine(stack):
     r = TrigRoundFix(r)
     stack.push(r)
 
+
 def Tangent(stack):
     '''
     Returns the trigonometric "tan()" of the most recent
@@ -393,6 +421,7 @@ def Tangent(stack):
     r = math.tan(a)
     r = TrigRoundFix(r)
     stack.push(r)
+
 
 def Arcsine(stack):
     '''
@@ -407,6 +436,7 @@ def Arcsine(stack):
         r = TrigRoundFix(r)
         stack.push(r)
 
+
 def Arccosine(stack):
     '''
     Returns the trigonometric "arccos()" of the most recent
@@ -420,6 +450,7 @@ def Arccosine(stack):
         r = TrigRoundFix(r)
         stack.push(r)
 
+
 def Arctangent(stack):
     '''
     Returns the trigonometric "arctan()" of the most recent
@@ -430,6 +461,7 @@ def Arctangent(stack):
     r = TrigRoundFix(r)
     stack.push(r)
 
+
 def ToDegrees(stack):
     '''
     Converts a stack entry from radians to degrees.
@@ -437,6 +469,7 @@ def ToDegrees(stack):
     a = stack.pop()
     r = math.degrees(a)
     stack.push(r)
+
 
 def ToRadians(stack):
     '''
@@ -454,6 +487,7 @@ def Random(stack):
     Returns a pseudo-random number from 0 to 1.
     '''
     stack.push(random())
+
 
 def DebugIter(stack):
     '''
@@ -473,6 +507,7 @@ def DebugIter(stack):
     elif a < 0:
         return "xkcd.com/1245 !"
 
+
 def Help(stack):
     '''
     Displays interactive help for on-board and
@@ -481,6 +516,7 @@ def Help(stack):
     import rpcalc.help
     rpcalc.help.main()
     return "returning to " + stack.name + '.'
+
 
 def ExitHelp(stack):
     return "use Shift+Q (capital Q) to quit. type ? for help."
@@ -498,12 +534,12 @@ def ExitHelp(stack):
 
 from collections import OrderedDict
 bindings = OrderedDict((
-#### Stack
+    # Stack
     ('D', (Drop, 1)),
     ('C', (Clear, 0)),
     ('#', (Length, 0)),
     ('w', (SwapXY, 2)),
-#### Arithmetic
+    # Arithmetic
     ('+', (Add, 2)),
     ('-', (Subtract, 2)),
     ('*', (Multiply, 2)),
@@ -517,23 +553,23 @@ bindings = OrderedDict((
     ("sqrt", (SqRoot, 1)),
     ("abs", (Absolute, 1)),
     ('!', (Factorial, 1)),
-#### Sequence Operators
+    # Sequence Operators
     ('S', (Summation, 1)),
     ('P', (Product, 1)),
-#### Statistics
+    # Statistics
     ("mean", (Mean, 1)),
     ("med", (Median, 1)),
-#### Constants
+    # Constants
     ("ke", (ConstE, 0)),
     ("kpi", (ConstPi, 0)),
-#### Logic
+    # Logic
     ("==", (EqTest, 2)),
     ('=!', (NotTest, 2)),
     ('<', (LtTest, 2)),
     ('>', (GtTest, 2)),
     ("=<", (LtEqTest, 2)),
     ("=>", (GtEqTest, 2)),
-#### Trigonometry
+    # Trigonometry
     ("sin", (Sine, 1)),
     ("cos", (Cosine, 1)),
     ("tan", (Tangent, 1)),
@@ -542,10 +578,9 @@ bindings = OrderedDict((
     ("atan", (Arctangent, 1)),
     ("deg", (ToDegrees, 1)),
     ("rad", (ToRadians, 1)),
-#### Others
+    # Others
     ("rand", (Random, 0)),
-    ("debug", (DebugIter, 1)),#DEBUG
+    ("debug", (DebugIter, 1)),  # DEBUG
     ('?', (Help, 0)),
     ('', (ExitHelp, 0)),
 ))
-

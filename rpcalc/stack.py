@@ -5,7 +5,9 @@
 import math
 from rpcalc.inout import clear
 
+
 class Stack:
+
     '''
     An implementation of the RPN stack in Python3.
     Internally uses a list and negative indexes.
@@ -21,6 +23,7 @@ class Stack:
     >>> print(x)
     4.8879
     '''
+
     def __init__(self, initList, name, limit=None):
         self.items = initList
         self.name = name
@@ -38,12 +41,13 @@ class Stack:
     def __str__(self):
         '''Implements str().'''
         rep = self.name
-        if self.name != '': rep += '\n'
+        if self.name != '':
+            rep += '\n'
         if self.limit:
             rep += "limited to " + str(self.limit) + " entries\n"
-        backList = [ self[i] for i in range(len(self)) ]
+        backList = [self[i] for i in range(len(self))]
         if len(self) != 0:
-            longestEntry = max( [ len(str(i)) for i in self.items ] )
+            longestEntry = max([len(str(i)) for i in self.items])
         else:
             longestEntry = 3
         rep += "--" * int(math.floor(longestEntry / 2 + 1)) + '-'
@@ -84,7 +88,7 @@ class Stack:
             raise IndexError("empty stack!")
         elif self.limit:
             toReturn = self.items.pop()
-            newList = [ self.items[0] ]
+            newList = [self.items[0]]
             newList.extend(self.items)
             self.items = newList
             return toReturn
@@ -108,4 +112,3 @@ class Stack:
             print(self[0])
         else:
             print(0)
-

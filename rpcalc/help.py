@@ -18,9 +18,11 @@ Q - quit rpcalc
 
 pause = "Press any key to continue..."
 
+
 def getHelp(symbol):
-    fn = ops.bindings[symbol][0] # get operation fn name
+    fn = ops.bindings[symbol][0]  # get operation fn name
     print(fn.__doc__)
+
 
 def main():
     while True:
