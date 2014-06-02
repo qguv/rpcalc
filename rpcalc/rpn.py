@@ -151,16 +151,11 @@ def workLoop(stack, buf, errors, printFlag): # fifth re-write!
         buf += getch() # reads input from user without enter key
         buf, errors, printFlag = keyHandler(stack, buf, errors)
 
-
 # DO IT #
-def main(limit=None, values=None):
+if __name__ == "__main__":
     stack = Stack([], 'stack view', limit=limit)
     buf, errors, printFlag = '', '', False
     if values:
         for n in values:
             stack.push(n)
     workLoop(stack, buf, errors, printFlag)
-
-if __name__ == "__main__":
-    main()
-
